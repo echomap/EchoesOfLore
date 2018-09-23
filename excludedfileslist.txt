@@ -1,0 +1,9 @@
+.gitignore
+_backup\
+docs\
+help\
+Screenshots\
+*.cmd
+copyToESO.cmd
+copyToBuild.cmd
+excludedfileslist.txt

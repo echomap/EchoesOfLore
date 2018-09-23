@@ -1,0 +1,162 @@
+<GuiXml>
+  <Controls>
+    
+	<TopLevelControl name="EchoesOfLoreMain" allowBringToTop="false" hidden="true"
+      mouseEnabled="true" movable="true" resizeHandleSize="4" >
+    <Dimensions x="600" y="600" />
+    <Anchor point="TOP" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-200" offsetX="-100"/>
+
+    <OnInitialized> </OnInitialized>
+    <OnShow> </OnShow>
+    <OnMoveStop> EchoesOfLore:onMoveStop() </OnMoveStop>
+
+		<Controls>
+
+      <Control name="$(parent)_HeaderTop">
+        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$(parent)"/>
+        <Dimensions x="600" y="50"/>
+        <Controls>   
+          <Texture name="$(parent)_Bg" textureFile="EsoUI/Art/LoreLibrary/lorelibrary_scroll.dds" alpha="1">
+            <Dimensions x="600" y="50" />
+            <Anchor point="CENTER" relativeTo="$(parent)" offsetY="0" offsetX="0" />
+          </Texture>
+          <Label name="$(parent)_MainTitle" horizontalAlignment="CENTER" font="ZoFontBookPaperTitle"
+              text="Echoes Of Lore" >
+            <Anchor point="CENTER" relativeTo="$(parent)" offsetX="0" offsetY="0" />
+          </Label>
+        </Controls>
+      </Control>
+      
+      <Scroll name="$(parent)_LeftPage">
+        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$(parent)" offsetY="60" offsetX="50" />
+        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$(parent)" offsetY="20" offsetX="0" />
+        <OnInitialized>
+          self:SetScrollBounding(SCROLL_BOUNDING_UNBOUND)
+        </OnInitialized>
+        <Controls>
+         <Texture name="$(parent)_Bg" textureFile="EsoUI/Art/LoreLibrary/lorelibrary_scroll.dds" alpha="1">
+            <Dimensions x="900" y="600" />
+            <Anchor point="CENTER" relativeTo="$(parent)" offsetY="0" offsetX="0" />
+          </Texture>
+          <Label name="$(parent)_Title" horizontalAlignment="CENTER" font="ZoFontBookPaperTitle"
+              text="PageTitle" >
+            <Dimensions x="375" />
+            <Anchor point="TOP" relativeTo="$(parent)" relativePoint="BOTTOM" />
+          </Label>
+          <Label name="$(parent)_Edit" horizontalAlignment="LEFT" font="ZoFontWinH5"
+                  maxInputCharacters="1000" multiLine="true" >
+            <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$(parent)" offsetX="40" offsetY="60" />
+            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$(parent)" offsetY="-60" offsetX="-40" />
+          </Label>
+        </Controls>
+      </Scroll>
+
+      <Control name="$(parent)_Sidebar" layer="2">
+        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$(parent)" offsetY="60" offsetX="0" />
+        <Dimensions x="50" y="500"/>      
+        <Controls>  
+          <Texture name="$(parent)_Bg" textureFile="EsoUI/Art/LoreLibrary/lorelibrary_scroll.dds" alpha="1">
+            <Dimensions x="80" y="500" />
+            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetY="0" offsetX="0" />
+          </Texture>
+          <Label name="$(parent)_LabelTop" mouseEnabled="true" font="ZoFontBookPaper" linkEnabled="true"
+              text="Pages" >
+            <Dimensions x="50" />
+            <Anchor point="TOP" relativeTo="$(parent)" />
+          </Label>
+          
+          <Button name="$(parent)_BtnTop">
+            <Anchor point="TOP" relativeTo="$(parent)_LabelTop" relativePoint="BOTTOM" offsetX="10" offsetY="4" />
+            <Dimensions x="50" y="50" />
+            <Textures normal="EsoUI/art/buttons/decline_up.dds"
+                  pressed="EsoUI/art/buttons/decline_down.dds"
+                  mouseOver="EsoUI/art/buttons/decline_over.dds"
+            />
+            <OnMouseUp>EchoesOfLore:CloseUI(self)</OnMouseUp>
+          </Button>
+          <Button name="$(parent)_BtnTop2" hidden="true" >
+            <Anchor point="TOP" relativeTo="$(parent)_BtnTop" relativePoint="BOTTOM" offsetX="0" offsetY="4" />
+            <Dimensions x="50" y="50" />
+            <Textures normal="EsoUI/art/buttons/info_up.dds"
+                  pressed="EsoUI/art/buttons/info_down.dds"
+                  mouseOver="EsoUI/art/buttons/info_over.dds"
+            />
+          </Button>
+          <Button name="$(parent)_BtnTop3" hidden="true" >
+            <Anchor point="TOP" relativeTo="$(parent)_BtnTop2" relativePoint="BOTTOM" offsetX="0" offsetY="4" />
+            <Dimensions x="50" y="50" />
+            <Textures normal="EsoUI/art/buttons/info_up.dds"
+                  pressed="EsoUI/art/buttons/info_down.dds"
+                  mouseOver="EsoUI/art/buttons/info_over.dds"
+            />
+          </Button>
+          <Button name="$(parent)_BtnTop4" hidden="true" >
+            <Anchor point="TOP" relativeTo="$(parent)_BtnTop3" relativePoint="BOTTOM" offsetX="0" offsetY="4" />
+            <Dimensions x="50" y="50" />
+            <Textures normal="EsoUI/art/buttons/info_up.dds"
+                  pressed="EsoUI/art/buttons/info_down.dds"
+                  mouseOver="EsoUI/art/buttons/info_over.dds"
+            />
+          </Button>
+        </Controls>
+      </Control>
+
+      <Control name="$(parent)_TopButtonRow">
+        <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$(parent)_HeaderTop" offsetY="10" offsetX="0" layer="2"/>
+        <Dimensions x="500" y="50"/>
+        <Controls>
+          <Button name="$(parent)_BtnClose">
+            <Anchor point="TOPRIGHT" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetX="-10" offsetY="0" />
+            <Dimensions x="40" y="40" />
+            <Textures normal="EsoUI/art/buttons/decline_up.dds"
+                  pressed="EsoUI/art/buttons/decline_down.dds"
+                  mouseOver="EsoUI/art/buttons/decline_over.dds"
+            />
+            <OnMouseUp>EchoesOfLore:CloseUI(self)</OnMouseUp>
+          </Button>
+          <Button name="$(parent)_BtnTop2">
+            <Anchor point="TOPRIGHT" relativeTo="$(parent)_BtnClose" relativePoint="TOPLEFT" offsetX="0" offsetY="0" />
+            <Dimensions x="40" y="40" />
+            <Textures normal="EsoUI/art/icons/achievements_indexicon_dungeons_up.dds"
+                  pressed="EsoUI/art/icons/achievements_indexicon_dungeons_down.dds"
+                  mouseOver="EsoUI/art/buttons/achievements_indexicon_dungeons_over.dds"
+            />
+            <OnMouseUp>EchoesOfLore:ShowView(self,"Area")</OnMouseUp>
+          </Button>
+          <Button name="$(parent)_BtnTop3">
+            <Anchor point="TOPRIGHT" relativeTo="$(parent)_BtnTop2" relativePoint="TOPLEFT" offsetX="0" offsetY="0" />
+            <Dimensions x="40" y="40" />
+            <Textures normal="EsoUI/art/lfg/lfg_indexicon_dungeon_up.dds"
+                  pressed="EsoUI/art/lfg/lfg_indexicon_dungeon_down.dds"
+                  mouseOver="EsoUI/art/lfg/lfg_indexicon_dungeon_over.dds"
+            />
+            <OnMouseUp>EchoesOfLore:ShowView(self,"Dungeons")</OnMouseUp>
+          </Button>
+        </Controls>
+      </Control>
+   
+      <Control name="$(parent)_TopSubRowDungeon" hidden="true">
+        <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$(parent)_TopButtonRow" offsetY="-15" offsetX="0" layer="2"/>
+        <Dimensions x="500" y="50"/>
+        <Controls>
+          <Control name="$(parent)_DropdownDName" inherits="ZO_ScrollableComboBox" font="ZoFontCreditsText"
+              mouseEnabled="true" tier="HIGH">
+            <Dimensions y="29" x="200" />
+            <Anchor point="TOPRIGHT" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetX="0" offsetY="0" />
+            <OnShow> </OnShow>
+          </Control>
+          <Control name="$(parent)_DropdownDBoss" inherits="ZO_ScrollableComboBox"  font="ZoFontCreditsText"
+                mouseEnabled="true" tier="HIGH">
+            <Dimensions y="29" x="200" />
+            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="30" offsetY="0" />
+            <OnShow> </OnShow>
+          </Control>
+        </Controls>
+      </Control>
+
+    </Controls>
+  </TopLevelControl>
+  
+  </Controls>
+</GuiXml>
+  
