@@ -45,5 +45,6 @@ libs\LibCustomMenu\LibCustomMenu.lua
 
 EchoesOfLore.lua
 EchoesOfLore_Util.lua
+EchoesOfLore_Data.lua
 EchoesOfLore_UI.lua
 Settings.lua

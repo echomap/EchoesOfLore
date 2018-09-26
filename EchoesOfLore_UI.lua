@@ -81,7 +81,7 @@ function EchoesOfLore:showViewDungeon()
   EchoesOfLoreMain_TopSubRowDungeon_DropdownDName.comboBox = EchoesOfLoreMain_TopSubRowDungeon_DropdownDName.comboBox or ZO_ComboBox_ObjectFromContainer(EchoesOfLoreMain_TopSubRowDungeon_DropdownDName)
   local comboBox = EchoesOfLoreMain_TopSubRowDungeon_DropdownDName.comboBox
   comboBox:ClearItems()
-  comboBox:SetSortsItems(false)
+  comboBox:SetSortsItems(true)
   local function OnItemSelect1(_, choiceText, choice)
     EchoesOfLore:debugMsg(" choiceText=" .. choiceText .. " choice=" .. tostring(choice) )  
     --ElderScrollsOfAlts:doCharacterSelected(choiceText, choice) --getQualityDict()[choiceText])
@@ -90,27 +90,22 @@ function EchoesOfLore:showViewDungeon()
     PlaySound(SOUNDS.POSITIVE_CLICK)    
   end
   local validChoices = {} -- ElderScrollsOfAlts:ListOfCategories(true)
-  table.insert(validChoices, "None")
+  --local nonElem = {}
+  --nonElem.name = "None"  
+  table.insert(validChoices, "_None"  )
   for k, v in pairs(EchoesOfLore.Dungeons) do
     if k ~= nil then
       --d("List: players " .. k)
       table.insert(validChoices, k)
     end
   end
-  --[[
-  table.insert(validChoices, "Arx Corinium")
-  table.insert(validChoices, "Blackheart Haven")
-  
-  table.insert(validChoices, "Spindleclutch 1")
-  table.insert(validChoices, "Spindleclutch 2")
-      
-  table.insert(validChoices, "Wayreset Sewers 1")
-  table.insert(validChoices, "Wayreset Sewers 2")
-  table.insert(validChoices, "White-Gold Tower")
-  --]]
-  for i = 1, #validChoices do
-    local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect1)
-    comboBox:AddItem(entry)
+  if(validChoices~=nil)then
+    local validChoicesS = validChoices
+    --table.sort( validChoices, EchoesOfLore.SortDungeonData )   
+    for i = 1, #validChoicesS do
+      local entry = comboBox:CreateItemEntry(validChoicesS[i], OnItemSelect1)
+      comboBox:AddItem(entry)
+    end
   end
   comboBox:SelectFirstItem()
   
@@ -118,8 +113,8 @@ function EchoesOfLore:showViewDungeon()
   EchoesOfLore:showViewDungeon2()
 end
 
-function EchoesOfLore:showViewDungeon2(varselected)
-  EchoesOfLore:debugMsg("showViewDungeon2= varselected=" .. tostring(varselected) )  
+function EchoesOfLore:showViewDungeon2(dungeon)
+  EchoesOfLore:debugMsg("showViewDungeon2= dungeon=" .. tostring(dungeon) )  
   --EchoesOfLoreMain_TopSubRowDungeon_DropdownDBoss
   EchoesOfLoreMain_TopSubRowDungeon_DropdownDBoss.comboBox = EchoesOfLoreMain_TopSubRowDungeon_DropdownDBoss.comboBox or ZO_ComboBox_ObjectFromContainer(EchoesOfLoreMain_TopSubRowDungeon_DropdownDBoss)
   local comboBox = EchoesOfLoreMain_TopSubRowDungeon_DropdownDBoss.comboBox
@@ -133,10 +128,12 @@ function EchoesOfLore:showViewDungeon2(varselected)
     PlaySound(SOUNDS.POSITIVE_CLICK)    
   end
   local validChoices = {} --ElderScrollsOfAlts:ListOfCategories(true)  
+  --local nonElem = {}
+  --nonElem.name = "Overall"    
   table.insert(validChoices, "Overall")
-  if(varselected~=nil)then
-    if(EchoesOfLore.Dungeons[varselected]~=nil and EchoesOfLore.Dungeons[varselected].bosses~=nil)then
-      for k, v in pairs(EchoesOfLore.Dungeons[varselected].bosses) do
+  if(dungeon~=nil)then
+    if(EchoesOfLore.Dungeons[dungeon]~=nil and EchoesOfLore.Dungeons[dungeon].bosses~=nil)then
+      for k, v in pairs(EchoesOfLore.Dungeons[dungeon].bosses) do
         if k ~= nil then
           --d("List: players " .. k)
           table.insert(validChoices, k)
@@ -144,11 +141,6 @@ function EchoesOfLore:showViewDungeon2(varselected)
       end
     end
   end
-  
-  --[[table.insert(validChoices, "Map")
-  table.insert(validChoices, "Spindlekin")
-  table.insert(validChoices, "Swarm Mother")
-  --]]
 
   for i = 1, #validChoices do
     local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
@@ -158,6 +150,14 @@ function EchoesOfLore:showViewDungeon2(varselected)
   --if(varselected~=nil)then
   --  comboBox2:SetSelectedItem(varselected)  
   --end
+  
+  --
+  local sText = ""
+  if(EchoesOfLore.Dungeons[dungeon]~=nil and EchoesOfLore.Dungeons[dungeon].text~=nil)then
+    sText = EchoesOfLore.Dungeons[dungeon].text
+    EchoesOfLore:debugMsg("showDungeonText set sText")    
+  end
+  EchoesOfLoreMain_LeftPage_Edit:SetText(sText)  
 end
 
 --
@@ -173,42 +173,46 @@ function EchoesOfLore:showDungeonText()
   if(dungeon~=nil)then
     local boss = EchoesOfLore.view.bossselected
     EchoesOfLore:debugMsg("showDungeonText boss=" .. tostring(boss) )  
-    if(EchoesOfLore.Dungeons[dungeon]~=nil and EchoesOfLore.Dungeons[dungeon].bosses~=nil)then
-      if(EchoesOfLore.Dungeons[dungeon].bosses[boss]~=nil)then
-        sText = EchoesOfLore.Dungeons[dungeon].bosses[boss].text
-        EchoesOfLore:debugMsg("showDungeonText set sText")
+    if(EchoesOfLore.Dungeons[dungeon]==nil)then
+      --
+    elseif(boss=="Overall")then
+      if(EchoesOfLore.Dungeons[dungeon].text~=nil)then
+        sText = EchoesOfLore.Dungeons[dungeon].text
       end
+    elseif(EchoesOfLore.Dungeons[dungeon]~=nil) then
+      sText = EchoesOfLore:combineText(
+              EchoesOfLore.Dungeons[dungeon].bosses[boss].text,
+              EchoesOfLore.Dungeons[dungeon].bosses[boss].mechanics,
+              EchoesOfLore.Dungeons[dungeon].bosses[boss].strategy,
+              EchoesOfLore.Dungeons[dungeon].bosses[boss].strattanks,
+              EchoesOfLore.Dungeons[dungeon].bosses[boss].stratdps,
+              EchoesOfLore.Dungeons[dungeon].bosses[boss].stratheals )
+        EchoesOfLore:debugMsg("showDungeonText set sText")
     end
-  end
+  end--dungeon
    EchoesOfLoreMain_LeftPage_Edit:SetText(sText)  
 end
 
---
-EchoesOfLore.Dungeons = {}
-
-function EchoesOfLore:InitializeData()
-  EchoesOfLore.Dungeons = {
-      ["Arx Corinium"]      = {} ,
-      ["Blackheart Haven"]  = {} ,
-      ["Spindleclutch 1"]   = {} ,
-      ["Spindleclutch 2"]   = {} ,
-      ["Wayreset Sewers 1"] = {} ,
-      ["Wayreset Sewers 2"] = {} ,
-      ["White-Gold Tower"]  = {} ,
-  }
-  
-  EchoesOfLore.Dungeons["Arx Corinium"].bosses = {}
-  EchoesOfLore.Dungeons["Spindleclutch 1"].bosses = {}
-  
-  EchoesOfLore.Dungeons["Spindleclutch 1"].bosses = {
-     ["Spindlekin"]   = {
-        text = "Spindlekin is a boss...",
-      } ,
-     ["Swarm Mother"] = {
-      } ,
-  }
-  
-  --ElderScrollsOfAlts.Sunk_Tooltip["Jewelry"] = {
-    --[0] = "Allows the use of |c00FFFFPewter|r Ounces.",
+function EchoesOfLore:combineText(var1,var2,var3,var4,var5,var6)
+    if(var1==nil)then
+      var1 = ""
+    end
+    if(var2==nil)then
+      var2 = ""
+    end
+    if(var3==nil)then
+      var3 = ""
+    end
+    if(var4==nil)then
+      var4 = ""
+    end
+    if(var5==nil)then
+      var5 = ""
+    end
+    if(var6==nil)then
+      var6 = ""
+    end
+    local sText = string.format("%s\n%s\n%s\n%s\n%s\n%s\n",
+              var1,var2,var3,var4,var5,var6)
+    return sText
 end
-

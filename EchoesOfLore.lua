@@ -88,7 +88,7 @@ end
 function EchoesOfLore.OnAddOnLoaded(event, addonName)
     if addonName ~= EchoesOfLore.name then return end
     EVENT_MANAGER:UnregisterForEvent(EchoesOfLore.name, EVENT_ADD_ON_LOADED)
-  --
+    --(savedVariableTable, version, namespace, defaults, profile, displayName, characterName)
     EchoesOfLore.savedVariables = ZO_SavedVars:New("EchoesOfLore_SavedVariables", 1, nil, defaultSettings)
 
     -- LMM Settings menu in Settings.lua.

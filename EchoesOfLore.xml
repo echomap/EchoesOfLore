@@ -4,7 +4,7 @@
 	<TopLevelControl name="EchoesOfLoreMain" allowBringToTop="false" hidden="true"
       mouseEnabled="true" movable="true" resizeHandleSize="4" >
     <Dimensions x="600" y="600" />
-    <Anchor point="TOP" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-200" offsetX="-100"/>
+    <Anchor point="TOP" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-300" offsetX="-100"/>
 
     <OnInitialized> </OnInitialized>
     <OnShow> </OnShow>
@@ -52,7 +52,7 @@
       </Scroll>
 
       <Control name="$(parent)_Sidebar" layer="2">
-        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$(parent)" offsetY="60" offsetX="0" />
+        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$(parent)" offsetY="70" offsetX="0" />
         <Dimensions x="50" y="500"/>      
         <Controls>  
           <Texture name="$(parent)_Bg" textureFile="EsoUI/Art/LoreLibrary/lorelibrary_scroll.dds" alpha="1">
