@@ -2,6 +2,13 @@
 -- EchosOfLore--
 ----------------
 
+--
+function EchoesOfLore:setTextArea(mText)
+    EchoesOfLoreMain_ScrollAreaScrollChild_Edit:SetText(mText)  
+    --local hOff, vOff = EchoesOfLoreMain_ScrollAreaScrollChild:GetScrollOffsets()
+end
+
+
 --Called when addon Activated
 function EchoesOfLore.Initialize()
   EchoesOfLore:InitializeData()
@@ -68,13 +75,13 @@ end
 
 --
 function EchoesOfLore:clearView()
-  EchoesOfLoreMain_LeftPage_Edit:SetText("")
+  EchoesOfLore:setTextArea("")
 end
 
 --
 function EchoesOfLore:showViewDungeon()
   EchoesOfLoreMain_TopSubRowDungeon:SetHidden(false)
-  EchoesOfLoreMain_LeftPage_Edit:SetText("Dungeons\n123\n1234\n12345\n123456")
+  EchoesOfLore:setTextArea("Dungeons\n123\n1234\n12345\n123456")
     --EchoesOfLoreMain_Sidebar_BtnTop2
 
   --EchoesOfLoreMain_TopSubRowDungeon_DropdownDName
@@ -157,12 +164,12 @@ function EchoesOfLore:showViewDungeon2(dungeon)
     sText = EchoesOfLore.Dungeons[dungeon].text
     EchoesOfLore:debugMsg("showDungeonText set sText")    
   end
-  EchoesOfLoreMain_LeftPage_Edit:SetText(sText)  
+  EchoesOfLore:setTextArea(sText)  
 end
 
 --
 function EchoesOfLore:showViewArea()
-    EchoesOfLoreMain_LeftPage_Edit:SetText("AREA asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f")  
+    EchoesOfLore:setTextArea("AREA asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f")  
 end
 
 --
@@ -190,7 +197,7 @@ function EchoesOfLore:showDungeonText()
         EchoesOfLore:debugMsg("showDungeonText set sText")
     end
   end--dungeon
-   EchoesOfLoreMain_LeftPage_Edit:SetText(sText)  
+   EchoesOfLore:setTextArea(sText)  
 end
 
 function EchoesOfLore:combineText(var1,var2,var3,var4,var5,var6)
