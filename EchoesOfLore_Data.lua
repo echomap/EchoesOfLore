@@ -5,118 +5,542 @@
 --
 EchoesOfLore.Dungeons = {}
 
+--
 function EchoesOfLore:InitializeData()
   EchoesOfLore.Dungeons = {
-     -- ["None"]      = {name="None" } ,
-      ["Arx Corinium"]      = { } ,
-      ["Blackheart Haven"]  = { } ,
-      ["Spindleclutch 1"]   = { } ,
-      ["Spindleclutch 2"]   = { } ,
-      ["Wayrest Sewers 1"]  = { } ,
-      ["Wayrest Sewers 2"]  = { } ,
-      ["White-Gold Tower"]  = { } ,
+      ["Arx Corinium"]      = { order=1 } ,
+      ["Blackheart Haven"]  = { order=2 } ,
+      ["Spindleclutch 1"]   = { order=3 } ,
+      ["Spindleclutch 2"]   = { order=4 } ,
+      ["Wayrest Sewers 1"]  = { order=5 } ,
+      ["Wayrest Sewers 2"]  = { order=6 } ,
+      ["White-Gold Tower"]  = { order=7 } ,
   }
-  EchoesOfLore.Dungeons["Arx Corinium"].text = ""
-  EchoesOfLore.Dungeons["Arx Corinium"].bosses = {
-    ["Fanged Menace"] = {
-      order=1,
-      text       = "Boss Mechanics:\nFrontal cone attack that causes knockback and damages severely any player caught in it.\nAOE Poison attack that absorbs health from those hit by it to the Boss. The red circle made underneat him while he curls up can damage heavily and also heal the boss.\nOther ads surrounding the boss\nHeavy melee attacks\n\nStrategy:\nDeal with the ads first.\nThe tank should block the heavy Melee attack and keep the boss focused away from the group.\nAvoid the large AOE red circle as it can instantly wipeout any player within its reach.\n",
-    } ,
-    ["Ganakton the Tempest"] = {
-      order=1,
-      text       = "Boss Mechanics:\nLightning Wave that is emitted towards a random player. The wave can cause high amounts of Shock damage and stun anyone close-by.\nImmediately after the wave, the Boss will send a lightning bolt at the same player causing Shock damage and stunning them again.\nGanakton can also electrify all players with a shock pulse every now and then. This does medium levels of damage but is unavoidable.\nFrontal cone lightning breath\n\nStrategy:\n\nDue to all the shock waves that can stun players, it is best to spread out across the room to give yourself plenty of room to avoid the Waves and ensure you don't hurt another player in the process.\nIf you get hit by the Wave, you can escape the Stun element by using an Interrupt or break free ability using your stamina.\nThe shock pulses are difficult to avoid so it is best to just heal through them.\n",      
-    } ,
-    ["Sliklenia the Songstress"] = {
-      order=1,
-      text       = "Boss Mechanics:\nA pet ad that you should not kill until the boss is dead.\nSound pulse that does high amounts of damage when the boss sings.\nHeavy melee attack\n\nStrategy:\nDON'T kill the pet before killing the boss. The ad is actually beneficial to the players in order to minimize the damage taken from the singing. When the boss sings, the pet will create a sonic shield in a random location in the room and retreat to it. You should follow the pet into that shield to avoid taking the crazy amounts of damage the Sound pulses can deal.(She must be a horrible singer because you can die from her singing!)\nKill the pet after the Songstress dies.\nTank should block the heavy melee attacks.\n",
-    } ,
-    ["Matron Ixniaa"] = {
-      order=1,
-      text       = "Boss Mechanics:\nRandomly places 2 circles (1 big and 1 small) underneath a player.\nBunch of ads\n\nStrategy:\nDeal with the ads first as they can be overwhelming if not taken care of from the start.\nThe inner circle (smaller one) must be avoided as it can deal large amounts of damage and even kill you if you're not at full health. The outer circle (bigger one) does damage from which you can recover.\nHealer should try to keep the player targeted with the 2 circles at full health as a precaution\n",      
-    } ,
-    ["Ancient Lurcher"] = {
-      order=1,
-      text       = "Boss Mechanics:\nRandomly targets a player with a green beam that does severe poison damage.\nRed circles underneath the Boss that damage those caught inside.\nEnrage and Lightning charge that strengthens his AOE ability once his health is below 50%\nBunch of ads\n\nStrategy:\nAttack the ads first before you focus on the boss.\nAvoid the green beams as they can be fatal.\n",      
-    } ,
-    ["Sellistrix the Lamia Queen"] = {
-      order=1,
-      text       = "Boss Mechanics:\nCharges at players at random doing small amounts of damage\nLightning strikes channelled at certain islands in the room marked by red circles. During this attack, if the Queen is in the water, the water becomes electrified and any players standing in the water will be electrocuted.\nFrontal cone scream that does heavy damage.\n\nStrategy:\nTank should focus the Queen facing away from the rest of the group to ensure your group is not hit by the nasty frontal scream.\nAvoid being in the water as you risk being electrocuted if the lightning strike takes place while the Queen is standing in water.\nThe islands are a safe bet but they get targeted by the lightning AOE from time to time.\nIt may be better to just stay on the island and endure the AOE hit rather than stepping in the electrified water if you have a dedicated healer on your group.\nJumping around from island to island can be safer but prove to be more dangerous for the group as you risk them running into a frontal cone attack aimed at you as you move about.\n",      
-    } ,
+  EchoesOfLore:setupArxCorinium()    
+  EchoesOfLore:setupBlackheartHaven()  
+  EchoesOfLore:setupSpindleclutch1()  
+  EchoesOfLore:setupSpindleclutch2()  
+  EchoesOfLore:setupWayrestSewers1()  
+  EchoesOfLore:setupWayrestSewers2()  
+  EchoesOfLore:setupWhiteGoldTower()
+end
+
+--
+function EchoesOfLore:setupArxCorinium()   
+  local dungeonName = "Arx Corinium"
+  EchoesOfLore.Dungeons[dungeonName] = {}
+  EchoesOfLore.Dungeons[dungeonName].metadata = {}
+  EchoesOfLore.Dungeons[dungeonName].text = {}
+  EchoesOfLore.Dungeons[dungeonName].bosses = {}
+  local bName = nil
+  ---------
+  ---------
+  bName = "Fanged Menace"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 1,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "The first boss in Arx Corinium. He’s a snake miniboss, and isn’t very difficult as long as you stay away from his health leech ability.\nFanged Menace is surrounded by some adds which you should take care of before focusing on him.",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 2,
+      text = "Frontal cone attack that causes knockback and damages severely any player caught in it.\nAOE Poison attack that absorbs health from those hit by it to the Boss. The red circle made underneath him while he curls up can damage heavily and also heal the boss.\nOther ads surrounding the boss\nHeavy melee attacks",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Strategy"] = {
+      order = 3,
+      text = "Deal with the ads first.\nThe tank should block the heavy Melee attack and keep the boss focused away from the group.\nAvoid the large AOE red circle as it can instantly wipeout any player within its reach.\n",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Tank"] = {
+      order = 4,
+      text = "The tank needs to look out for the heavy melee attack – block it.\n",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["DPS"] = {
+      order = 5,
+      text = "Stay out of the AOE poison damage ability\n",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Healer"] = {
+      order = 6,
+      text = "Stay out of the AOE poison damage ability\n",
+  }  
+  
+  ---------
+  ---------
+  bName = "Ganakton the Tempest"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 2,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "The second boss in Arx Corinium. He can be quite lethal. Spreading apart is beneficial. Do not stack.",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 2,
+      text = "The first ability Ganakton has is his frontal cone lightning breath. This should be easy to avoid.\nPeriodically electrifies himself and deals a moderate amount of damage to everyone in a few shock pulses. You don’t seem to be able to avoid this – just heal through it.\nHas a lightning wave attack. He will target a random player in the group and send a wave of lightning towards him. The wave will deal a high amount of Shock damage and stun anyone caught in it. You can get out of the stun with your interrupt / break free ability, if you have the stamina for it.\nFollowing the Lightning wave, he electrifies his tail and sends a bolt of lightning at the same player, dealing a lot of Shock damage and again stunning them on the ground.",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Tank"] = {
+      order = 3,
+      text = "Tank\n",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["DPS"] = {
+      order = 4,
+      text = "Avoid frontal cone, do not stack, avoid the lightning wave and stun, as he follows up with more damage.\n",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Healer"] = {
+      order = 5,
+      text = "Periodically electrifies himself and deals a moderate amount of unavoidable damage to everyone\n",
+  }  
+  
+  ---------
+  ---------
+  bName = "Sliklenia the Songstress"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 3,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "The third boss in Arx Corinium. Do not kill the add, pet as it has an essential role in this fight, and you should NOT kill it.",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "Sliklenia has a heavy melee attack which the tank should block.\nWhen she becomes stationary and starts singing, she'll start dealing tons of damage in pulses around the room. The Songstress’ Pet creates a sonic shield at a random location in the room. The pet will retreat to the shield – you should follow.",
+  }
+
+  ---------
+  ---------
+  bName = "Matron Ixniaa"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 4,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "The fourth boss in Arx Corinium. She’s a miniboss and doesn’t have much health. She only has one ability to look out for, which can be lethal.\nIxniaa is surrounded by a bunch of adds, you should take them down first.\n",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "She periodically targets a random player, places a red circle beneath the player, and follows up with another circle, which will cover an even bigger area. The inner circle is the one you must avoid – it deals tons of damage and can be lethal if you’re not topped up. The outer circle also deals damage, but is much more manageable.",
+  }
+
+  ---------
+  ---------
+  bName = "Ancient Lurcher"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 5,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "The fifth boss in Arx Corinium. Just like the previous miniboss, Ancient Lurcher also has a bunch of adds around him. Kill them before you focus on him.",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "Ancient Lurcher casts a red circle beneath him, dealing damage to anyone caught in it. It should be easy to avoid.\nAncient Lurcher sometimes targets a random player with a green beam, which deals heavy poison damage.\nOnce Ancient Lurcher drops below 50% Health or so, he enrages and charges himself with Lightning, empowering his AOE ability.",
+  }
+
+  ---------
+  ---------
+  bName = "Sellistrix the Lamia Queen"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 6,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "The sixth and final boss in Arx Corinium.\nThe room is filled with water, but there are a couple of small islands which are safe to stand on. Staying in the water is bad.",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 2,
+      text = "Sellistrix has a frontal cone scream which deals a lot of damage.\nThe tank should face Sellistrix away from the rest of the group.\nSellistrix periodically charges at random players, dealing a low amount of damage in the process.\nShe will start channeling lightning and target the small islands in the room, marked with red circles. Sometimes you have a safe island to go to, sometimes not.\nIt’s very important that Sellistrix isn’t standing in water when this ability goes off, or the water will become electrified and hurt everyone in it.\nThe lightning attack on the islands does deal a bit of damage, but less than in the water.\n",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Tank"] = {
+      order = 3,
+      text = "Face away from players as usual, she charges players randomly, electricity is worse in water, if she's in it then everyone else should not be!\ n",
   }
   
   --[[
-  ["TEMPLATE"] = {
-      order=1,
-      text       = "",      
-    } ,
-  --]]
+  ---------
+  ---------
+  bName = "TEMP"
   
-  --EchoesOfLore.Dungeons["Spindleclutch 1"].name = "Spindleclutch 1"
-  EchoesOfLore.Dungeons["Spindleclutch 1"].text = 
-      "Spindleclutch is a dungeon in northeastern Glenumbra, it contains a lot of spiders!"
-  EchoesOfLore.Dungeons["Spindleclutch 1"].bosses = {
-     ["Spindlekin"] = {
-          order=1,
-          text       = "Spindlekin is a boss...\n\nBoss Mechanics:\n Summons spider minions throughout the fight. Will devour dead spider minions to regain health.\n\nGeneral:\n Stack up around the boss to maximize area healing & damage output when dealing with adds.\n\nTank Strategy:\n Focus on boss. Only tank adds when healer is in danger.\nBash the boss to interrupt the self-heal from devouring minion corpses.\n\nDPS Strategy:\n Burn down the boss.\n\nHeals Strategy:\n Run to the tank if adds are becoming a problem for you",
-      } ,
-     ["Swarm Mother"] = {
-      order=1,
-      text       = "Boss Mechanics:\n\nSpawns adds throughout the fight, Powerful melee heavy attack, Leaps at a random member of the group.\n\nGeneral\nStack around the boss to maximize area healing & damage output.\nThis also minimizes time lost when the boss leaps to a random target.\n\nTank\nFocus on keeping the boss occupied. Only tank adds if healer is in danger or you have extra resources.\nBoss will randomly charge group members, regardless of an active taunt.\nBlock boss's heavy attack. (high damage and a knock-back)\n\n\nDPS\nFocus on the adds whenever they are spawned to reduce stress on the healer.\n\n\nHealer\nTank's health can spike if a heavy attack is not blocked\nRandom members of group will be charged for heavy physical damage\n",
-    } ,
-    ["Cerise the Widow-Maker"] = {
-      order=1,
-      text       = "Boss Mechanics:\nPulls with a group of Fight's Guild trash mobs\nSelf buffs to increase damage output, Can immobilize players, Heavy attack\n\nTank\nFocus attention on the boss and follow the same strategy as the trash mob pulls.\n\nDPS\nFocus on the trash mobs using the same burn order that you have been using through previous trash mob pulls (either Healer -> Caster DPS -> Melee or Caster DPS -> Healer -> Melee). Finish with Cerise herself.\n\nHealer\nExpect heavy damage on the tank due to Cerise's powerful attacks and other mobs.\n\n",
-    },
-    ["Big Rabbu"] = {
-      order=1,
-      text       = "Boss Mechanics:\nPulls with a group of Fight's Guild trash mobsCan pull players to him (instant)Directional charge (his path will be shown in red)\n\nTank\nTank Rabbu and any other mobs according to the strategy you used for Cerise and other trash mob pulls.Block Rabbu's charge attack if possible, which will stop it from hitting anyone else.\n\nDPS\nFocus on the mobs using the same strategy as Cerise and other trash mob pulls. (Either Healer -> Caster DPS -> Melee or Caster DPS -> Healer -> Melee)\n\nHealer\nSimilar to Cerise, expect the tank to take heavy damage. Anyone who gets in the way of Rabbu's charge will need significant healing.",
-      },
-      ["The Whisperer"] = {
-      order=1,
-      text       = "",
-      },
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 1,
+      metadata = {},
+      text     = {}
   }
-
-  EchoesOfLore.Dungeons["Wayrest Sewers 1"].text = ""
-  EchoesOfLore.Dungeons["Wayrest Sewers 1"].bosses = {
-    ["Slimecraw"] = {
-      order=1,
-      text       = "Slimecraw has a frontal cone tailswipe. It deals high physical damage and does a pretty big knockback.",
-    } ,
-    ["Investigator Garron"] = {
-      order=1,
-      text       = "Garron likes to teleport around the room. Just keep track of him.\n\nThe main mechanic in this fight is the green orb Garron summons. It will start chasing after random players, dealing damage to anyone caught in its radius. If the orb is chasing you, run away, but make sure you don’t drag the orb through your group members.\n\nGarron periodically summons two Restless Soul ghosts with 717 Health on the opposite sides of the room. The ghosts have ranged attacks, and they should be taken down asap.\n\nGarron also has a highly damaging ranged knockback which seems to prefer distant targets.",      
-    } ,
-    ["Uulgarg the Hungry"] = {
-      order=1,
-      text       = "Uulgarg has a AOE fear ability.\n\nUulgarg has a nasty heavy melee attack, which deals a lot of damage unless blocked.\n\nHe likes to do it right after he has feared everyone. This could potentially kill the tank unless he has enough Stamina to break out of the fear and block the attack.\n\nHe sometimes stops and does a whirlwind attack around him, dealing physical damage.",
-    } ,
-    ["The Rat Whisperer"] = {
-      order=1,
-      text       = "He periodically casts a magic AOE damage spell at the tank, indicated with a red circle.\n\nThe boss shouts “Come to me my minions” as he summons a bunch of low Health skeevers to aid him.\n\nThe Rat Whisperer sometimes casts a cold damage root spell on the tank.",      
-    } ,
-    ["Varaine Pellingare"] = {
-      order=1,
-      text       = "The tank needs to look out for Varaine’s heavy melee attack, and block it.\n\nHe periodically casts a quickly expanding AOE spell around him that deals a lot of damage and briefly stuns anyone caught in it.\n\nHe has a frontal cone attack, seemingly to a random direction with a jump animation associated with the ability thatis tricky to avoid. Getting hit by the frontal cone attack will knock you down and deal medium physical damage.",      
-    } ,
-    ["Allene Pellingare"] = {
-      order=1,
-      text       = "The tank needs to block Allene’s heavy melee attack.\n\nAllene will do a Teleport Strike to random targets, which deals a lot of damage and briefly snares the target.\n\nAllene vanishes roughly every 25% of her Health to summon Fiendish Hallucinations. They are large bats with 562 Health. The number of bats summoned increases after each summon. Normally bats are immune to root effects, but for some reason these bats are not. A dragonknight with Dark Talons will completely destroy them.\n\nAfter the last group of bats has been summoned, Allene should be at around 25% Health. Allene takes on a ghost form and seems to deal a bit more damage in the last phase.",      
-    } ,
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "",
   }
-
-
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "",
+  }
+--]] 
+  --Arx Corinium
 end
 
---Sort
+
+function EchoesOfLore:setupBlackheartHaven()  
+  local dungeonName = "Blackheart Haven"
+  EchoesOfLore.Dungeons[dungeonName] = {}
+  EchoesOfLore.Dungeons[dungeonName].metadata = {}
+  EchoesOfLore.Dungeons[dungeonName].text = {
+    overview = "A pirate themed dungeon."
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses = {}
+  local bName = nil
+  ---------
+  ---------
+  bName = "Iron-Heel"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 1,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "Kill the ads quickly.",
+  }
+  --Blackheart Haven
+end
+
+function EchoesOfLore:setupSpindleclutch1()   
+  local dungeonName = "Spindleclutch 1"
+  EchoesOfLore.Dungeons[dungeonName] = {}
+  EchoesOfLore.Dungeons[dungeonName].metadata = {}
+  EchoesOfLore.Dungeons[dungeonName].text = {
+    overview = "A spider themed dungeon."
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses = {}
+  local bName = nil
+  ---------
+  ---------
+  bName = "Spindlekin"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 1,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "",
+  }
+  
+  ---------
+  ---------
+  bName = "The Swarm Mother"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 1,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "",
+  }
+  
+  ---------
+  ---------
+  bName = "Cerise the Widow-Maker"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 1,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "",
+  }
+
+  ---------
+  ---------
+  bName = "Big Rabbu"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 1,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "",
+  }
+
+  ---------
+  ---------
+  bName = "The Whisperer"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 1,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "",
+  }
+  --Spindleclutch 1
+end
+
+function EchoesOfLore:setupSpindleclutch2()   
+  local dungeonName = "Spindleclutch 2"
+  EchoesOfLore.Dungeons[dungeonName] = {}
+  EchoesOfLore.Dungeons[dungeonName].metadata = {}
+  EchoesOfLore.Dungeons[dungeonName].text = {
+    overview = "A spider themed dungeon."
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses = {}
+  local bName = nil
+  
+  ---------
+  ---------
+  bName = "Mad Mortine"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 1,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "",
+  }
+  
+  ---------
+  ---------
+  bName = "Blood Spawn"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 2,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "",
+  }
+  
+  ---------
+  ---------
+  bName = "Praxin Douare"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 3,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "",
+  }
+  
+  ---------
+  ---------
+  bName = "Flesh Atronach"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 4,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "",
+  }
+  
+  ---------
+  ---------
+  bName = "Urvan Veleth"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 5,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "",
+  }
+  
+  ---------
+  ---------
+  bName = "Vorenor Winterbourne"
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
+      order    = 6,
+      metadata = {},
+      text     = {}
+  }
+  
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
+      order = 1,
+      text = "",
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
+      order = 1,
+      text = "",
+  }
+  --Spindleclutch 2
+end
+
+function EchoesOfLore:setupWayrestSewers1()   
+  local dungeonName = "Wayrest Sewers 1"
+  EchoesOfLore.Dungeons[dungeonName] = {}
+  EchoesOfLore.Dungeons[dungeonName].metadata = {}
+  EchoesOfLore.Dungeons[dungeonName].text = {
+    overview = "A sewer themed dungeon."
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses = {}
+  local bName = nil
+  
+  --Wayrest Sewers 1
+end
+
+function EchoesOfLore:setupWayrestSewers2()  
+  local dungeonName = "Wayrest Sewers 2"
+  EchoesOfLore.Dungeons[dungeonName] = {}
+  EchoesOfLore.Dungeons[dungeonName].metadata = {}
+  EchoesOfLore.Dungeons[dungeonName].text = {
+    overview = "A sewer themed dungeon."
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses = {}
+  local bName = nil
+  
+  --Wayrest Sewers 2
+end
+
+function EchoesOfLore:setupWhiteGoldTower()  
+  local bName = nil
+  
+  --White-Gold Tower
+end
+
+--------
+--Sort--
 local dungeonSortKeys =
   {
     ["name"]          = { }, 
+    ["text"]          = { tiebreaker = "name" }, 
     ["order"]         = { tiebreaker = "name", isNumeric = true }, 
   }
   
 --Sort
 function EchoesOfLore.SortDungeonData(a, b)
-  return ZO_TableOrderingFunction( a.data, b.data, "order", dungeonSortKeys, ZO_SORT_ORDER_DOWN )
+  return ZO_TableOrderingFunction( a, b, "order", dungeonSortKeys, ZO_SORT_ORDER_DOWN )
+end
+--Sort
+function EchoesOfLore.SortDungeonData2(a, b)
+  if(a==nil or a.order==nil)then return true end
+  if(b==nil or b.order==nil)then return false end
+  return a.order < b.order
 end
 
+--------
+--Sort--
+local bossesSortKeys =
+  {
+    ["name"]          = { }, 
+    ["text"]          = { tiebreaker = "name" }, 
+    ["order"]         = { tiebreaker = "name", isNumeric = true }, 
+  }
+  
+--Sort
+function EchoesOfLore.SortBossesData(a, b)
+  return ZO_TableOrderingFunction( a, b, "order", dungeonSortKeys, ZO_SORT_ORDER_DOWN )
+end
+function EchoesOfLore.SortBossesData2(a, b)
+  if(a==nil or a.order==nil)then return true end
+  if(b==nil or b.order==nil)then return false end
+  return a.order<b.order
+end
+--------
+--Sort--
+local buttonSortKeys =
+  {
+    ["name"]          = { }, 
+    ["text"]          = { tiebreaker = "name" }, 
+    ["order"]         = { tiebreaker = "text", isNumeric = true }, 
+  }
+  
+--Sort
+function EchoesOfLore.SortButtonData(a, b)
+  return ZO_TableOrderingFunction( a, b, "order", buttonSortKeys, ZO_SORT_ORDER_DOWN )
+end
