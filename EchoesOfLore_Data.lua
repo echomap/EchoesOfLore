@@ -28,7 +28,9 @@ end
 --
 function EchoesOfLore:setupArxCorinium()   
   local dungeonName = "Arx Corinium"
-  EchoesOfLore.Dungeons[dungeonName] = {}
+  if(EchoesOfLore.Dungeons[dungeonName]==nil)then
+    EchoesOfLore.Dungeons[dungeonName] = {}
+  end
   EchoesOfLore.Dungeons[dungeonName].metadata = {}
   EchoesOfLore.Dungeons[dungeonName].text = {}
   EchoesOfLore.Dungeons[dungeonName].bosses = {}
@@ -205,7 +207,9 @@ end
 
 function EchoesOfLore:setupBlackheartHaven()  
   local dungeonName = "Blackheart Haven"
-  EchoesOfLore.Dungeons[dungeonName] = {}
+  if(EchoesOfLore.Dungeons[dungeonName]==nil)then
+    EchoesOfLore.Dungeons[dungeonName] = {}
+  end
   EchoesOfLore.Dungeons[dungeonName].metadata = {}
   EchoesOfLore.Dungeons[dungeonName].text = {
     overview = "A pirate themed dungeon."
@@ -231,7 +235,9 @@ end
 
 function EchoesOfLore:setupSpindleclutch1()   
   local dungeonName = "Spindleclutch 1"
-  EchoesOfLore.Dungeons[dungeonName] = {}
+  if(EchoesOfLore.Dungeons[dungeonName]==nil)then
+    EchoesOfLore.Dungeons[dungeonName] = {}
+  end
   EchoesOfLore.Dungeons[dungeonName].metadata = {}
   EchoesOfLore.Dungeons[dungeonName].text = {
     overview = "A spider themed dungeon."
@@ -337,7 +343,9 @@ end
 
 function EchoesOfLore:setupSpindleclutch2()   
   local dungeonName = "Spindleclutch 2"
-  EchoesOfLore.Dungeons[dungeonName] = {}
+  if(EchoesOfLore.Dungeons[dungeonName]==nil)then
+    EchoesOfLore.Dungeons[dungeonName] = {}
+  end
   EchoesOfLore.Dungeons[dungeonName].metadata = {}
   EchoesOfLore.Dungeons[dungeonName].text = {
     overview = "A spider themed dungeon."
@@ -463,7 +471,9 @@ end
 
 function EchoesOfLore:setupWayrestSewers1()   
   local dungeonName = "Wayrest Sewers 1"
-  EchoesOfLore.Dungeons[dungeonName] = {}
+  if(EchoesOfLore.Dungeons[dungeonName]==nil)then
+    EchoesOfLore.Dungeons[dungeonName] = {}
+  end
   EchoesOfLore.Dungeons[dungeonName].metadata = {}
   EchoesOfLore.Dungeons[dungeonName].text = {
     overview = "A sewer themed dungeon."
@@ -476,7 +486,9 @@ end
 
 function EchoesOfLore:setupWayrestSewers2()  
   local dungeonName = "Wayrest Sewers 2"
-  EchoesOfLore.Dungeons[dungeonName] = {}
+  if(EchoesOfLore.Dungeons[dungeonName]==nil)then
+    EchoesOfLore.Dungeons[dungeonName] = {}
+  end
   EchoesOfLore.Dungeons[dungeonName].metadata = {}
   EchoesOfLore.Dungeons[dungeonName].text = {
     overview = "A sewer themed dungeon."
@@ -504,7 +516,7 @@ local dungeonSortKeys =
   
 --Sort
 function EchoesOfLore.SortDungeonData(a, b)
-  return ZO_TableOrderingFunction( a, b, "order", dungeonSortKeys, ZO_SORT_ORDER_DOWN )
+  return ZO_TableOrderingFunction( a.data, b.data, "order", dungeonSortKeys, ZO_SORT_ORDER_DOWN )
 end
 --Sort
 function EchoesOfLore.SortDungeonData2(a, b)
@@ -524,7 +536,7 @@ local bossesSortKeys =
   
 --Sort
 function EchoesOfLore.SortBossesData(a, b)
-  return ZO_TableOrderingFunction( a, b, "order", dungeonSortKeys, ZO_SORT_ORDER_DOWN )
+  return ZO_TableOrderingFunction( a, b, "order", bossesSortKeys, ZO_SORT_ORDER_DOWN )
 end
 function EchoesOfLore.SortBossesData2(a, b)
   if(a==nil or a.order==nil)then return true end

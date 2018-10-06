@@ -47,10 +47,16 @@ end
 
 --
 function EchoesOfLore:clearView()
-  --EchoesOfLore:setTextArea("")
+  EchoesOfLore:GetOrCreateTextBox("")
+  --clear buttons
+  if(EchoesOfLore.view.buttons~=nil)then
+    for index, value in ipairs(EchoesOfLore.view.buttons) do
+      value:SetHidden(true)
+    end
+  end
 end
 
---
+-- Create Dungeon List/dropdown
 function EchoesOfLore:showViewDungeon()
   EchoesOfLoreMain_TopSubRowDungeon:SetHidden(false)
   EchoesOfLoreMain_SideContainer:SetHidden(false)
@@ -65,6 +71,7 @@ function EchoesOfLore:showViewDungeon()
   local function OnItemSelect1(_, choiceText, choice)
     EchoesOfLore:debugMsg(" choiceText=" .. choiceText .. " choice=" .. tostring(choice) )  
     --ElderScrollsOfAlts:doCharacterSelected(choiceText, choice) --getQualityDict()[choiceText])
+    EchoesOfLore:clearView()
     EchoesOfLore:showViewDungeon2(choiceText)
     EchoesOfLore.view.dungeonselected = choiceText
     PlaySound(SOUNDS.POSITIVE_CLICK)    
@@ -75,20 +82,23 @@ function EchoesOfLore:showViewDungeon()
   table.insert(validChoices, "_None"  )
   for k, v in pairs(EchoesOfLore.Dungeons) do
     if k ~= nil then
-      --d("List: players " .. k)
+      --d("List: dungeons " .. k .. " v="..tostring(v) )
+      --if(v.order~=nil)then d(" order="..tostring(v.order) ) end
       table.insert(validChoices, k)
     end
   end
   if(validChoices~=nil)then
-    local validChoicesS = validChoices
+    --local validChoicesS = validChoices
+    --[[
     validChoicesS = table.sort( validChoices,  EchoesOfLore.SortDungeonData )   
     if(validChoicesS==nil)then
       validChoicesS = validChoices
       d("EchoesOfLore: bad sort (Dungeon)!")
       --table.sort( validChoices, EchoesOfLore.SortDungeonData )   
     end
-    for i = 1, #validChoicesS do
-      local entry = comboBox:CreateItemEntry(validChoicesS[i], OnItemSelect1)
+    --]]
+    for i = 1, #validChoices do
+      local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect1)
       comboBox:AddItem(entry)
     end
   end
@@ -98,7 +108,7 @@ function EchoesOfLore:showViewDungeon()
   EchoesOfLore:showViewDungeon2()
 end
 
---SHOW/Setup dropdowns
+--SHOW/Setup Dungeon BOSS dropdowns
 function EchoesOfLore:showViewDungeon2(dungeon)
   EchoesOfLore:debugMsg("showViewDungeon2= dungeon=" .. tostring(dungeon) )  
   --EchoesOfLoreMain_TopSubRowDungeon_DropdownDBoss
@@ -107,35 +117,49 @@ function EchoesOfLore:showViewDungeon2(dungeon)
   comboBox:ClearItems()
   comboBox:SetSortsItems(false)
   local function OnItemSelect(_, choiceText, choice)
-    EchoesOfLore:debugMsg(" choiceText=" .. choiceText .. " choice=" .. tostring(choice) )  
+    EchoesOfLore:debugMsg(" choiceText=" .. tostring(choiceText) .. " choice=" .. tostring(choice) )  
     --ElderScrollsOfAlts:doCharacterSelected(choiceText, choice) --getQualityDict()[choiceText])
     EchoesOfLore.view.bossselected = choiceText
-    EchoesOfLore:showDungeonText()
+    EchoesOfLore:showDungeonText()    
     PlaySound(SOUNDS.POSITIVE_CLICK)    
   end
   local validChoices = {} --ElderScrollsOfAlts:ListOfCategories(true)  
   --local nonElem = {}
   --nonElem.name = "Overall"    
-  table.insert(validChoices, "Overall")
+  --nonElem.text = "Overall"  
+  --nonElem.order = 0
+  --table.insert(validChoices, nonElem)
+  --table.insert(validChoices, "Overall")  
   if(dungeon~=nil)then
     if(EchoesOfLore.Dungeons[dungeon]~=nil and EchoesOfLore.Dungeons[dungeon].bosses~=nil)then
       for k, v in pairs(EchoesOfLore.Dungeons[dungeon].bosses) do
         if k ~= nil then
+          --Test TODO
+          if(v.order==nil)then v.order = #validChoices end
+          --local nonElem = {}
+          --nonElem.name = k 
+          --nonElem.order = v.order
+          if(validChoices[v.order]~=nil) then
+            v.order = v.order+1
+          end
+          validChoices[ v.order ] = k
+          --table.insert(validChoices, nonElem)          
           --d("List: players " .. k)
-          table.insert(validChoices, k)
+          --table.insert(validChoices, k)
         end
       end
     end
   end
-  
+  --[[
   local dataLines2   = table.sort( validChoices,  EchoesOfLore.SortBossesData )
   if(dataLines2==nil) then
     dataLines2 = validChoices
     d("EchoesOfLore: bad sort (Bosses)!")
   end
+  ]]--
 
-  for i = 1, #dataLines2 do
-    local entry = comboBox:CreateItemEntry(dataLines2[i], OnItemSelect)
+  for i = 1, #validChoices do
+    local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
     comboBox:AddItem(entry)
   end
   comboBox:SelectFirstItem()
@@ -154,8 +178,10 @@ function EchoesOfLore:showViewArea()
     --EchoesOfLore:setTextArea("AREA asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f")  
 end
 
---SHOW/setup Text based on boss selected
+--SHOW/setup Text based on dungeon & boss selected
 function EchoesOfLore:showDungeonText()
+  EchoesOfLore:clearView()
+  
   local sText = ""
   local dungeon = EchoesOfLore.view.dungeonselected
   EchoesOfLore:debugMsg("showDungeonText dungeon=" .. tostring(dungeon) )  
@@ -199,14 +225,26 @@ function EchoesOfLore:showDungeonText()
     --TODO clear data
     return
   end
+  --Test TODO
+  local validChoices = {}
+  for k, v in pairs(textList) do
+    if(v.order==nil)then v.order = #validChoices end
+    if(validChoices[v.order]~=nil) then
+      v.order = v.order+1
+    end
+    v.name = k
+    validChoices[ v.order ] = v
+  end
+  --[[
   local dataLines2   = table.sort( textList,  EchoesOfLore.SortButtonData )
   if(dataLines2==nil)then
     --TODO clear data
     dataLines2 = textList
     d("EchoesOfLore: Bad sort (Buttons)!")
   end
+  ]]--
   EchoesOfLore.view.buttons = {}
-  for key,value in pairs(dataLines2) do
+  for key,value in pairs(validChoices) do
     --EchoesOfLore:debugMsg("key="..tostring(key) .. " value="..tostring(value))
     --EchoesOfLoreMain_SideContainer:SetHidden(false)
     --local p = WM:CreateControl(name, parent, CT_BUTTON) 
@@ -240,9 +278,9 @@ function EchoesOfLore:showDungeonText()
     --s:SetWidth(100)
     --s:SetAlpha(0)
     --font="ZoFontGameLargeBold" 
-    s.ButtonName = key
-    s.name = key    
-    s:SetText(key)
+    s.ButtonName = value.name
+    s.name = value.name    
+    s:SetText(value.name)
     s:SetHidden(false)
     EchoesOfLore.view.buttons[nr] = s
     nr = nr + 1

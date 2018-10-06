@@ -3,7 +3,7 @@
     
 	<TopLevelControl name="EchoesOfLoreMain" allowBringToTop="false" hidden="true"
       mouseEnabled="true" movable="true" resizeHandleSize="15" >
-    <Dimensions x="475" y="400" />
+    <Dimensions x="450" y="400" />
     <Anchor point="TOP" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-300" offsetX="-100"/>
 
     <OnInitialized> </OnInitialized>
