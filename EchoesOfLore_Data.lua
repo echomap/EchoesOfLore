@@ -8,82 +8,67 @@ EchoesOfLore.Dungeons = {}
 --
 function EchoesOfLore:InitializeData()
   EchoesOfLore.Dungeons = {
-      ["Arx Corinium"]      = { order=1 } ,
-      ["Blackheart Haven"]  = { order=2 } ,
+      ["Fungal Grotto 1"]   = { order=1 } ,
+      ["Fungal Grotto 2"]   = { order=2 } ,
       ["Spindleclutch 1"]   = { order=3 } ,
       ["Spindleclutch 2"]   = { order=4 } ,
-      ["Wayrest Sewers 1"]  = { order=5 } ,
-      ["Wayrest Sewers 2"]  = { order=6 } ,
-      ["White-Gold Tower"]  = { order=7 } ,
+      ["The Banished Cells 1"]  = { order=5 } ,
+      ["The Banished Cells 2"]  = { order=6 } ,
+      ["Darkshade Caverns 1"]   = { order=7 } ,
+      ["Darkshade Caverns 2"]   = { order=8 } ,
+      ["Elden Hollow 1"]    = { order=9 } ,
+      ["Elden Hollow 2"]    = { order=10 } ,
+      ["Wayrest Sewers 1"]  = { order=11 } ,
+      ["Wayrest Sewers 2"]  = { order=12 } ,
+      ["Arx Corinium"]      = { order=13 } ,
+      ["City of Ash 1"]  = { order=14 } ,
+      ["City of Ash 2"]  = { order=15 } ,
+      ["Crypt of Hearts 1"]  = { order=16 } ,
+      ["Crypt of Hearts 2"]  = { order=17 } ,
+      ["Direfrost Keep"]     = { order=18 } ,
+      ["Tempest Island"]     = { order=19 } ,
+      ["Volenfell"]  = { order=20 } ,
+      ["Blackheart Haven"]   = { order=21 } ,
+      ["Blessed Crucible"]   = { order=22 } ,
+      ["Selene's Web"]       = { order=23 } ,
+      ["Vaults of Madness"]  = { order=24 } ,
+      --["White-Gold Tower"] = { order=25 } ,
   }
-  EchoesOfLore:setupArxCorinium()    
-  EchoesOfLore:setupBlackheartHaven()  
+  EchoesOfLore:setupFungalGrotto1()  
+  EchoesOfLore:setupFungalGrotto2()  
   EchoesOfLore:setupSpindleclutch1()  
   EchoesOfLore:setupSpindleclutch2()  
+
+  EchoesOfLore:setupArxCorinium()    
+  EchoesOfLore:setupBlackheartHaven()  
   EchoesOfLore:setupWayrestSewers1()  
   EchoesOfLore:setupWayrestSewers2()  
-  EchoesOfLore:setupWhiteGoldTower()
+  --EchoesOfLore:setupWhiteGoldTower()
 end
 
 --
 function EchoesOfLore:setupArxCorinium()   
   local dungeonName = "Arx Corinium"
-  if(EchoesOfLore.Dungeons[dungeonName]==nil)then
-    EchoesOfLore.Dungeons[dungeonName] = {}
-  end
-  EchoesOfLore.Dungeons[dungeonName].metadata = {}
-  EchoesOfLore.Dungeons[dungeonName].text = {}
-  EchoesOfLore.Dungeons[dungeonName].bosses = {}
-  local bName = nil
-  ---------
+  local description = "A dungeon."
+  EchoesOfLore:setupBaseDungeon(dungeonName,description)
+  local bName, order = nil, 0
+  
   ---------
   bName = "Fanged Menace"
-  
-  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
-      order    = 1,
-      metadata = {},
-      text     = {}
-  }
-  
-  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
-      order = 1,
-      text = "The first boss in Arx Corinium. He’s a snake miniboss, and isn’t very difficult as long as you stay away from his health leech ability.\nFanged Menace is surrounded by some adds which you should take care of before focusing on him.",
-  }
-  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
-      order = 2,
-      text = "Frontal cone attack that causes knockback and damages severely any player caught in it.\nAOE Poison attack that absorbs health from those hit by it to the Boss. The red circle made underneath him while he curls up can damage heavily and also heal the boss.\nOther ads surrounding the boss\nHeavy melee attacks",
-  }
-  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Strategy"] = {
-      order = 3,
-      text = "Deal with the ads first.\nThe tank should block the heavy Melee attack and keep the boss focused away from the group.\nAvoid the large AOE red circle as it can instantly wipeout any player within its reach.\n",
-  }
-  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Tank"] = {
-      order = 4,
-      text = "The tank needs to look out for the heavy melee attack – block it.\n",
-  }
-  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["DPS"] = {
-      order = 5,
-      text = "Stay out of the AOE poison damage ability\n",
-  }
-  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Healer"] = {
-      order = 6,
-      text = "Stay out of the AOE poison damage ability\n",
-  }  
+  order = order+1
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","The first boss in Arx Corinium. He’s a snake miniboss, and isn’t very difficult as long as you stay away from his health leech ability.\nFanged Menace is surrounded by some adds which you should take care of before focusing on him.")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","Frontal cone attack that causes knockback and damages severely any player caught in it.\nAOE Poison attack that absorbs health from those hit by it to the Boss. The red circle made underneath him while he curls up can damage heavily and also heal the boss.\nOther ads surrounding the boss\nHeavy melee attacks")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,3,"Strategy","Deal with the ads first.\nThe tank should block the heavy Melee attack and keep the boss focused away from the group.\nAvoid the large AOE red circle as it can instantly wipeout any player within its reach.\n");
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Tank","The tank needs to look out for the heavy melee attack – block it.\n");
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"DPS","Stay out of the AOE poison damage ability\n");
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Healer","Stay out of the AOE poison damage ability\n");
   
   ---------
   ---------
   bName = "Ganakton the Tempest"
+  order = order+1
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","The second boss in Arx Corinium. He can be quite lethal. Spreading apart is beneficial. Do not stack.")
   
-  EchoesOfLore.Dungeons[dungeonName].bosses[bName] = {
-      order    = 2,
-      metadata = {},
-      text     = {}
-  }
-  
-  EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Overview"] = {
-      order = 1,
-      text = "The second boss in Arx Corinium. He can be quite lethal. Spreading apart is beneficial. Do not stack.",
-  }
   EchoesOfLore.Dungeons[dungeonName].bosses[bName].text["Boss Mechanics"] = {
       order = 2,
       text = "The first ability Ganakton has is his frontal cone lightning breath. This should be easy to avoid.\nPeriodically electrifies himself and deals a moderate amount of damage to everyone in a few shock pulses. You don’t seem to be able to avoid this – just heal through it.\nHas a lightning wave attack. He will target a random player in the group and send a wave of lightning towards him. The wave will deal a high amount of Shock damage and stun anyone caught in it. You can get out of the stun with your interrupt / break free ability, if you have the stamina for it.\nFollowing the Lightning wave, he electrifies his tail and sends a bolt of lightning at the same player, dealing a lot of Shock damage and again stunning them on the ground.",
@@ -232,6 +217,72 @@ function EchoesOfLore:setupBlackheartHaven()
   }
   --Blackheart Haven
 end
+
+function EchoesOfLore:setupBaseBoss(dungeonName,bossName,bossOrder,order,key,value)
+  if(EchoesOfLore.Dungeons[dungeonName].bosses==nil)then
+    EchoesOfLore.Dungeons[dungeonName].bosses = {}
+  end
+  if(EchoesOfLore.Dungeons[dungeonName].bosses[bossName]==nil)then
+    EchoesOfLore.Dungeons[dungeonName].bosses[bossName] = {
+        order    = bossOrder,
+        metadata = {},
+        text     = {}
+    }
+  end
+  EchoesOfLore.Dungeons[dungeonName].bosses[bossName].text[key] = {
+      order = order,
+      text = value,
+  }
+end
+function EchoesOfLore:setupBaseDungeon(dungeonName,description)
+  if(EchoesOfLore.Dungeons[dungeonName]==nil)then
+    EchoesOfLore.Dungeons[dungeonName] = {}
+  end
+  EchoesOfLore.Dungeons[dungeonName].metadata = {}
+  EchoesOfLore.Dungeons[dungeonName].text = {
+    overview = description
+  }
+  EchoesOfLore.Dungeons[dungeonName].bosses = {}
+end
+
+function EchoesOfLore:setupFungalGrotto1()
+  local dungeonName = "Fungal Grotto 1"
+  local description = "A dungeon."
+  EchoesOfLore:setupBaseDungeon(dungeonName,description)
+  local bName, order = nil, 0
+  
+  ---------
+  bName = "Tazkad the Packmaster"
+  order = order+1
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","test1a")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","test1b")
+  bName = "Warchief Ozazai"
+  order = order+1
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","test1a")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","test1b")
+  bName = "Bloodbirther"
+  order = order+1
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","test1a")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","test1b")
+  bName = "Clatterclaw"
+  order = order+1
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","test1a")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","test1b")
+  bName = "Kra’gh the Dreugh King"
+  order = order+1
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","test1a")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","test1b")
+end
+
+function EchoesOfLore:setupFungalGrotto2()
+  local dungeonName = "Fungal Grotto 2"
+  local description = "A dungeon."
+  EchoesOfLore:setupBaseDungeon(dungeonName,description)
+  local bName = nil
+  ---------
+  ---------
+end
+
 
 function EchoesOfLore:setupSpindleclutch1()   
   local dungeonName = "Spindleclutch 1"
