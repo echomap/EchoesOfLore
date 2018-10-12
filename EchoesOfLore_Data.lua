@@ -74,7 +74,7 @@ function EchoesOfLore:InitializeData()
       ["Crypt of Hearts 2"]  = { order=17 } ,
       ["Direfrost Keep"]     = { order=18 } ,
       ["Tempest Island"]     = { order=19 } ,
-      ["Volenfell"]  = { order=20 } ,
+      ["Volenfell"]          = { order=20 } ,
       ["Blackheart Haven"]   = { order=21 } ,
       ["Blessed Crucible"]   = { order=22 } ,
       ["Selene's Web"]       = { order=23 } ,
