@@ -169,13 +169,22 @@ function EchoesOfLore:showViewDungeon2(dungeon)
   if(EchoesOfLore.Dungeons[dungeon]~=nil and EchoesOfLore.Dungeons[dungeon].text~=nil)then
     sText = EchoesOfLore.Dungeons[dungeon].text
     EchoesOfLore:debugMsg("showViewDungeon2 set sText")    
+ 
+    local bossesDataL = EchoesOfLore.Dungeons[dungeon].bosses[0]
+    if(bossesDataL~=nil)then
+      EchoesOfLore.view.dungeonselected = bossesDataL.bossName
+      EchoesOfLore:showDungeonText()    
+    end
   end
-  --EchoesOfLore:setTextArea(sText)
 end
 
 --
 function EchoesOfLore:showViewArea()
     --EchoesOfLore:setTextArea("AREA asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f asdf adsf sdfadsf sdfafaf   asfa adsf sdf df f")  
+  EchoesOfLoreMain_TopSubRowDungeon:SetHidden(true)
+  EchoesOfLoreMain_SideContainer:SetHidden(true)
+  EchoesOfLore:clearView()
+  --TODO
 end
 
 --SHOW/setup Text based on dungeon & boss selected
@@ -199,7 +208,8 @@ function EchoesOfLore:showDungeonText()
   if(boss==nil)then
     EchoesOfLore:debugMsg("showDungeonText boss is nil!")
     return
-  end  
+  end   
+  
   EchoesOfLore:debugMsg("showDungeonText boss=" .. tostring(boss) )  
   local bossesData = EchoesOfLore.Dungeons[dungeon].bosses
   if(bossesData==nil)then

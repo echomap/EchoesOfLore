@@ -3,7 +3,7 @@
     
 	<TopLevelControl name="EchoesOfLoreMain" allowBringToTop="false" hidden="true"
       mouseEnabled="true" movable="true" resizeHandleSize="15" >
-    <Dimensions x="450" y="400" />
+    <Dimensions x="450" y="300" />
     <Anchor point="TOP" relativeTo="GuiRoot" relativePoint="CENTER" offsetY="-300" offsetX="-100"/>
 
     <OnInitialized> </OnInitialized>
@@ -15,10 +15,14 @@
      <Control name="$(parent)_HeaderTop" hidden="true">
       <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$(parent)"/>
       <Dimensions x="600" y="50"/>
-      <Controls>   
+      <Controls>
+        <Backdrop name="$(parent)_BG" inherits="ZO_DefaultBackdrop"><AnchorFill/></Backdrop>
         <Texture name="$(parent)_Bg" textureFile="EsoUI/Art/LoreLibrary/lorelibrary_scroll.dds" alpha="1">
+          <Dimensions x="600" y="50"/>
+          <!--
           <Dimensions x="600" y="50" />
           <Anchor point="CENTER" relativeTo="$(parent)" offsetY="0" offsetX="0" />
+          -->
         </Texture>
         <Label name="$(parent)_MainTitle" horizontalAlignment="CENTER" font="ZoFontBookPaperTitle"
             text="Echoes Of Lore" >
@@ -40,7 +44,7 @@
                   text="" tier="1" layer="2" >
           <Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="$(parent)" offsetX="10" offsetY="20" />
           <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$(parent)" offsetX="0" offsetY="0" />
-          <Dimensions x="400" y="300"/>
+          <Dimensions x="400" y="300"/><!--todo?-->
         </Label>
       </Controls>
     </Control>
@@ -53,7 +57,7 @@
         <OnInitialized>ZO_Scroll_Initialize(self)</OnInitialized>
         <Controls>
           <Control name="$(parent)ScrollChild">
-            <Dimensions x="400" y="400" />
+            <Dimensions x="400" y="300" />
             <OnInitialized>self:SetParent(self:GetParent():GetNamedChild("Scroll"));self:SetAnchor(3,nil,3,0,0)</OnInitialized>
             <Controls>
                <EditBox name="$(parent)_Edit" inherits="ZO_DefaultEditMultiLine" 
@@ -116,19 +120,22 @@
       </Control>
    
       <Control name="$(parent)_TopSubRowDungeon" hidden="true" >
-        <Anchor point="TOP" relativePoint="BOTTOM" relativeTo="$(parent)_TopButtonRow" offsetY="0" offsetX="10" />
-        <Dimensions y="50"/>
-        <Controls>
-          <Control name="$(parent)_DropdownDName" inherits="ZO_ScrollableComboBox" font="ZoFontCreditsText"
-              mouseEnabled="true" tier="HIGH" layer="2">
-            <Dimensions y="30" x="250" />
+        <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$(parent)_TopButtonRow" offsetY="0" offsetX="0" />
+        <Dimensions y="30" x="400"/>
+        <Controls> 
+          <Backdrop name="$(parent)_BG" inherits="ZO_DefaultBackdrop" centercolor="6495ED" alpha="0.6">
+            <AnchorFill/>
+          </Backdrop>  
+          <Control name="$(parent)_DropdownDBoss" inherits="ZO_ScrollableComboBox"  font="ZoFontCreditsText"
+                mouseEnabled="true" tier="HIGH" layer="2" horizontalAlignment="RIGHT" >
+            <Dimensions y="30" x="200" />
             <Anchor point="TOPRIGHT" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetX="0" offsetY="0" />
             <OnShow> </OnShow>
           </Control>
-          <Control name="$(parent)_DropdownDBoss" inherits="ZO_ScrollableComboBox"  font="ZoFontCreditsText"
-                mouseEnabled="true" tier="HIGH" layer="2">
+          <Control name="$(parent)_DropdownDName" inherits="ZO_ScrollableComboBox" font="ZoFontCreditsText"
+              mouseEnabled="true" tier="HIGH" layer="2" horizontalAlignment="RIGHT" >
             <Dimensions y="30" x="200" />
-            <Anchor point="TOPLEFT" relativeTo="$(parent)" relativePoint="TOPLEFT" offsetX="0" offsetY="0" />
+            <Anchor point="TOPRIGHT" relativeTo="$(parent)_DropdownDBoss" relativePoint="TOPLEFT" offsetX="0" offsetY="0" />
             <OnShow> </OnShow>
           </Control>
         </Controls>
@@ -136,16 +143,14 @@
 
       <Control name="$(parent)_SideContainer" hidden="false" >
         <Anchor point="TOPRIGHT" relativeTo="$(parent)_TopButtonRow" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="30" />  
-        <Dimensions x="150" y="300"/>
+        <Dimensions x="150" y="220"/>
         <Controls>
           <Backdrop name="$(parent)_BG" inherits="ZO_DefaultBackdrop" centercolor="6495ED" alpha="0.6">
             <AnchorFill/>
             <Edge edgeSize="2"/>
           </Backdrop>  
-          
         </Controls>
       </Control>
-
 
     </Controls>
   </TopLevelControl>
