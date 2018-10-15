@@ -2,7 +2,14 @@
   <Layer name="SI_KEYBINDINGS_CATEGORY_GENERAL">
     <Category name="EchoesOfLore">
       <Action name="EOL_DISPLAY">
-		    <Up> EchoesOfLore.ToggleGui() </Up>
+		    <Up>EchoesOfLore.ToggleGui()</Up>
+      </Action>
+    </Category>
+  </Layer>
+  <Layer name="SI_KEYBINDINGS_LAYER_GENERAL">
+    <Category name="EchoesOfLore">
+      <Action name="EOL_DISPLAY2">
+		    <Up>EchoesOfLore.ToggleGui()</Up>
       </Action>
     </Category>
   </Layer>

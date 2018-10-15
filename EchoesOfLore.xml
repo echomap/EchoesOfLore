@@ -143,7 +143,7 @@
 
       <Control name="$(parent)_SideContainer" hidden="false" >
         <Anchor point="TOPRIGHT" relativeTo="$(parent)_TopButtonRow" relativePoint="BOTTOMLEFT" offsetX="0" offsetY="30" />  
-        <Dimensions x="150" y="220"/>
+        <Dimensions x="140" y="220"/>
         <Controls>
           <Backdrop name="$(parent)_BG" inherits="ZO_DefaultBackdrop" centercolor="6495ED" alpha="0.6">
             <AnchorFill/>

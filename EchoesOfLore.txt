@@ -4,7 +4,8 @@
 ## Author: Echomap
 ## Description: EchoesOfLore... 
 ## SavedVariables: EchoesOfLore_SavedVariables
-## OptionalDependsOn: LibAddonMenu-2.0 LibMainMenu
+## DependsOn: LibStub LibAddonMenu-2.0
+
 
 ## This Add-on is not created by, affiliated with or sponsored by ZeniMax Media Inc. or its affiliates.
 ## The Elder Scrolls® and related logos are registered trademarks or trademarks of ZeniMax Media Inc.
@@ -16,9 +17,7 @@ Languages\en.lua
 Languages\$(language).lua
 
 Bindings.xml
-
 EchoesOfLore.xml
-HarvensQuestJournal.xml
 
 libs\LibStub\LibStub.lua
 
@@ -39,9 +38,6 @@ libs\LibAddonMenu-2.0\controls\header.lua
 libs\LibAddonMenu-2.0\controls\slider.lua
 libs\LibAddonMenu-2.0\controls\texture.lua
 libs\LibAddonMenu-2.0\controls\divider.lua
-
-libs\LibMainMenu\LibMainMenu.lua
-libs\LibCustomMenu\LibCustomMenu.lua
 
 EchoesOfLore.lua
 EchoesOfLore_Util.lua
