@@ -1,11 +1,10 @@
 ## Title: EchoesOfLore
 ## Version: 0.0.1
-## APIVersion: 100023, 100024, 100025
+## APIVersion: 100024, 100025
 ## Author: Echomap
 ## Description: EchoesOfLore... 
 ## SavedVariables: EchoesOfLore_SavedVariables
 ## DependsOn: LibStub LibAddonMenu-2.0
-
 
 ## This Add-on is not created by, affiliated with or sponsored by ZeniMax Media Inc. or its affiliates.
 ## The Elder Scrolls® and related logos are registered trademarks or trademarks of ZeniMax Media Inc.
