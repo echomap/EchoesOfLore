@@ -4,7 +4,7 @@
 
 
 --Called when addon Activated
-function EchoesOfLore.Initialize()
+function EchoesOfLore.InitializeUI()
   EchoesOfLore:InitializeData()
   --local EM, WM, SM, ICON, MARK, AVAIL_EQUIPMENT_CACHE = EVENT_MANAGER, WINDOW_MANAGER, SCENE_MANAGER, {}, {}, nil
   EchoesOfLore.WM = WINDOW_MANAGER
