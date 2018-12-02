@@ -166,27 +166,28 @@ function EchoesOfLore:setupFungalGrotto2()
   order = order+1
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","If she connects two players, they must run away from each other or take high amounts of damage. If a player is held down by shadow tormentors, kill one to free them or they die.")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,3,"Veteran","TODO")
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,5,"Unique Drop","Knife of Shadows")
   ---------
   bName = "Ciirenas the Shepherd"
   order = order+1
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","Don't kill the spider adds, just pull them from her and kill the boss.")
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","Each spider that dies gives the boss a damange reduction, so... foucs the boss. CC the spiderss or tank them away from the boss maybe?")
   ---------
   bName = "Spawn of Mephala"
   order = order+1
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","TODO")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","If you are portaled to another room, kill the spiders inside to teleport back (may teleport person closest to opening). Get out of the expanding circle from boss. Run from the laser beam.")
   ---------
   bName = "Reggr Dark-Dawn"
   order = order+1
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","TODO")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","Does a whirling attack in a small circle, magicka Drain, and a heavy attack.")
   ---------
   bName = "Vila Theran"
   order = order+1
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","TODO")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","Stay grouped to minimize Black Hole AOEs created. To avoid a large DOT go into the shielded shrine, you can then exit to fight.")
   ---------
   --setupFungalGrotto2
 end
