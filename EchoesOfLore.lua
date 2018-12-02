@@ -90,6 +90,7 @@ function EchoesOfLore.EventSubZoneListUpdate(eventCode)
 end
 --131258 travel in city
 --131124 group member changed area
+--131257
 function EchoesOfLore.EventSubZoneChange(eventCode)
   --EchoesOfLore:debugMsg("EventSubZoneChange called")
   if( eventCode ~= nil and eventCode ~= 131258 ) then
@@ -148,11 +149,17 @@ end
 EVENT_MANAGER:RegisterForEvent(EchoesOfLore.name, EVENT_PLAYER_ACTIVATED, EchoesOfLore.Activated)
 
 -- EVENT
+-- 589825 changed local
 function EchoesOfLore.OnPlayerUnloaded(event)
   EchoesOfLore:debugMsg("OnPlayerUnloaded called")
   --EchoesOfLore.loadPlayerData()
   --EchoesOfLore.SaveSettings()
   --EchoesOfLore:DisableEvents()
+  if( event ~= nil ) then
+    local strI = "OnPlayerUnloaded: eventCode=<<1>>"
+    local strL = zo_strformat(strI, event )
+    EchoesOfLore:debugMsg(strL)
+  end  
   EchoesOfLore:debugMsg("OnPlayerUnloaded done") -- Prints to chat.
 end
 

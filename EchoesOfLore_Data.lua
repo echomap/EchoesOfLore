@@ -165,12 +165,13 @@ function EchoesOfLore:setupFungalGrotto2()
   bName = "Gaymne Bandu"
   order = order+1
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","TODO")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","If she connects two players, they must run away from each other or take high amounts of damage. If a player is held down by shadow tormentors, kill one to free them or they die.")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,5,"Unique Drop","Knife of Shadows")
   ---------
   bName = "Ciirenas the Shepherd"
   order = order+1
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","TODO")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","Each spider that dies gives the boss a damange reduction, so... foucs the boss. CC the spiderss or tank them away from the boss maybe?")
   ---------
   bName = "Spawn of Mephala"
   order = order+1

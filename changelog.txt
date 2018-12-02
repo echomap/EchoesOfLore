@@ -6,6 +6,7 @@
 
 -=-=-=-=-=-=-=-
 -=-=-=TODO=-=-=-
+-Button to print to chat
 -Vet dungeon swich
 -Scroll up when pasted text into box
 -Need to heavily edit the text to not upset wiki authors, like elderscrollsonline.wiki.fextralife.com, etc.
