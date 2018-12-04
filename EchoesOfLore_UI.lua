@@ -31,7 +31,7 @@ function EchoesOfLore:CloseUI(self)
 end
 
 function EchoesOfLore:DoPrintText()
-  if EchoesOfLore.view.textData ~= nil) then
+  if ( EchoesOfLore.view.textData ~= nil) then
     d(EchoesOfLore.view.textData)
   end
 end
