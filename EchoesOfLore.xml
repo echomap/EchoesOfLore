@@ -116,6 +116,15 @@
             />
             <OnMouseUp>EchoesOfLore:ShowView(self,"Dungeons")</OnMouseUp>
           </Button>
+          <Button name="$(parent)_BtnTop4">
+            <Anchor point="TOPRIGHT" relativeTo="$(parent)_BtnTop3" relativePoint="TOPLEFT" offsetX="0" offsetY="0" />
+            <Dimensions x="40" y="40" />
+            <Textures normal="EsoUI/art/tabs/tab_chat_active.dds"
+                  pressed="EsoUI/art/tabs/tab_disabled.dds"
+                  mouseOver="EsoUI/art/tabs/tab_inactivetab.dds"
+            />
+            <OnMouseUp>EchoesOfLore:DoPrintText(self,"Dungeons")</OnMouseUp>
+          </Button>
         </Controls>
       </Control>
    

@@ -61,7 +61,10 @@ function EchoesOfLore.SlashCommandHandler(text)
 	end
 end
 
---
+--when ride along, 131257, subZoneName/subZoneId filledin
+--Shrine port: player unloaded called 589825
+--ride into new zone: uloaded 58925
+--dungeon port lfg: playerunloaded=
 --(number eventCode, string zoneName, string subZoneName, boolean newSubzone, number zoneId, number subZoneId) 
 function EchoesOfLore.OnEventZoneChange(eventCode, zoneName, subZoneName, newSubzone, zoneId, subZoneId) 
   --EchoesOfLore:debugMsg("OnEventZoneChange called")
@@ -113,19 +116,27 @@ function EchoesOfLore.OnAreaLoadStarted(area, instance, zoneName, zoneDescriptio
   local strL = zo_strformat(strI, area, instance, zoneName, zoneDescription, loadingTexture, instanceType )
   EchoesOfLore:debugMsg(strL)  
 end
-
+function EchoesOfLore.OnPOISInitialized(eventCode)
+  local strI = "OnPOISInitialized: eventCode=<<1>>"
+  local strL = zo_strformat(strI, eventCode )
+  EchoesOfLore:debugMsg(strL)
+end
 
 function EchoesOfLore:DisableEvents()
   EchoesOfLore:debugMsg("DisableEvents called")
   EVENT_MANAGER:UnregisterForEvent(EchoesOfLore.name, EVENT_CURRENT_SUBZONE_LIST_CHANGED)
+  EVENT_MANAGER:UnregisterForEvent(EchoesOfLore.name, EVENT_POIS_INITIALIZED)
   EVENT_MANAGER:UnregisterForEvent(EchoesOfLore.name, EVENT_ZONE_CHANGED)
   EVENT_MANAGER:UnregisterForEvent(EchoesOfLore.name, EVENT_ZONE_UPDATE)
-  EVENT_MANAGER:UnregisterForEvent(EchoesOfLore.name, EVENT_CURRENT_SUBZONE_LIST_CHANGED)
+  --OnWorldMapChanged
+  --GetZoneNameByIndex()
+  --GetCurrentMapZoneIndex()
 end
 
 function EchoesOfLore:EnableEvents()
   EchoesOfLore:debugMsg("EnableEvents called")
   EVENT_MANAGER:RegisterForEvent(EchoesOfLore.name, EVENT_CURRENT_SUBZONE_LIST_CHANGED, EchoesOfLore.EventSubZoneChange)
+  EVENT_MANAGER:RegisterForEvent(EchoesOfLore.name, EVENT_POIS_INITIALIZED, EchoesOfLore.OnPOISInitialized)
   EVENT_MANAGER:RegisterForEvent(EchoesOfLore.name, EVENT_ZONE_CHANGED, EchoesOfLore.OnEventZoneChange)
   EVENT_MANAGER:RegisterForEvent(EchoesOfLore.name, EVENT_ZONE_UPDATE, EchoesOfLore.OnEventZoneUpdate)
   EVENT_MANAGER:RegisterForEvent(EchoesOfLore.name, EVENT_CURRENT_SUBZONE_LIST_CHANGED, EchoesOfLore.EventSubZoneListUpdate)
@@ -159,7 +170,15 @@ function EchoesOfLore.OnPlayerUnloaded(event)
     local strI = "OnPlayerUnloaded: eventCode=<<1>>"
     local strL = zo_strformat(strI, event )
     EchoesOfLore:debugMsg(strL)
-  end  
+  end
+  --
+  local currMZIndx = GetCurrentMapZoneIndex()
+  local currMZName = GetZoneNameByIndex(currMZIndx) 
+  EchoesOfLore.savedVariables.currMZIndex = currMZIndx
+  EchoesOfLore.savedVariables.currMZIndex = currMZName
+  d("Entered Zone: " .. currMZName )
+  --GetMapIndexByZoneId(number zoneId) 
+  
   EchoesOfLore:debugMsg("OnPlayerUnloaded done") -- Prints to chat.
 end
 

@@ -30,6 +30,13 @@ function EchoesOfLore:CloseUI(self)
   EchoesOfLoreMain:SetHidden(true)
 end
 
+function EchoesOfLore:DoPrintText()
+  if EchoesOfLore.view.textData ~= nil) then
+    d(EchoesOfLore.view.textData)
+  end
+end
+
+
 --
 function EchoesOfLore:ShowView(self,viewName)
   EchoesOfLore:debugMsg("ShowView Called!")  
@@ -342,6 +349,7 @@ function EchoesOfLore:SelectBossText(self)
     return
   end
   EchoesOfLore:GetOrCreateTextBox(textData)
+  EchoesOfLore.view.textData = textData
   --EchoesOfLore:ShowTextBox(textData)  
 end
 
