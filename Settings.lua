@@ -23,8 +23,8 @@ function EchoesOfLore.LoadSettings()
         [2] = {
             type = "header",
             title = nil,	--(optional)
-            text = "Experience Options",
-			name = "Experience Options",
+            text = "EchoesOfLore Options",
+            name = "EchoesOfLore Options",
             width = "full",	--or "half" (optional)
         }
     }
