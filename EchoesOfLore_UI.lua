@@ -32,7 +32,7 @@ end
 
 function EchoesOfLore:DoPrintText()
   if ( EchoesOfLore.view.textData ~= nil) then
-    if(d(EchoesOfLore.view.textData.text~-nil) then
+    if(EchoesOfLore.view.textData.text~-nil) then
       d(EchoesOfLore.view.textData.text)--TODO to channel?
     else
       d(EchoesOfLore.view.textData)
