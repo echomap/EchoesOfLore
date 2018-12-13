@@ -427,33 +427,36 @@ function EchoesOfLore:setupDarkshadeCaverns2()
   bName = "The Fallen Foreman"
   order = order+1
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","TODO")   
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","Fire caster boss. Uses ranged magic attacks and AOE. Kill the bunch of Adds.")   
   ---------
   bName = "Transmuted Hive Lord"
   order = order+1
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","TODO")   
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","Kill the two adds. All three do knockdowns on the tank. Occassionally the adds burrow, and the Hive Lord does a big AOE. DPS his health shield to stop the effect.  Healing will be heavy during this phase.")   
   ---------
   bName = "Transmuted Alit "
   order = order+1
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","TODO")   
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","These are 3 allits are standard allit mechanics, but if they are not all dead within a certain time they rez each other to about 1/8th health.  Get them all very low, and finish them off.")
   ---------
   bName = "Grubull the Transmuted"
   order = order+1
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","TODO")   
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","Warps around, summons adds, and places large self centered red circles which are lightning attacks.  Due to this, no tank is really needed, tank may dps. Kill adds, ignore boss, until the boss is knocked to the ground.  Then dps the boss, as it is only vulnerable at this time.  Repeat. ")   
   ---------
   bName = "Waves of Mech Mobs"
   order = order+1
   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","TODO")   
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","A boss event without a main named boss, with waves of spiders, spheres, and centurions.  The tank should make sure to pick up the centurions, and try to get what else they may.  AOE is your friend here.")   
   ---------
   bName = "The Engine Guardian "
   order = order+1
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","TODO")
-  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","TODO")   
-  --------- 
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,1,"Overview","Generally the group should stack.  Kill adds as a priority.  Then DPS the boss.  DoT effects are very valuable for against the boss, as it constantly moves around the room, and much of the time the group will be either killing adds or avoiding the boss's energy mechanics.  With patience, you will win.")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,2,"Boss Mechanics","Waves of Adds of 3 spheres.  Kill them fast so you can dps the boss.  They use a ground line AOE as most spheres do, and a self centered one.  Avoid both AOEs. This boss has multiple energy phases.  Due to the danger for melee, ranged dps is recommended.  No tank is really needed. Red/Fire phase he throws fire, Yellow/Lightning he shocks those that are close")
+  EchoesOfLore:setupBaseBoss(dungeonName,bName,order,3,"Fire Phase","The boss spins, whirling fire around itself, as well as throwing ranged fire-bombs.")
+   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,3,"Lightning Phase","The boss shocks anyone too close, don't get shocked!")
+   EchoesOfLore:setupBaseBoss(dungeonName,bName,order,3,"Poison Phase","The boss floods the room with poison, it must be healed through.  Alternatively, you may pull levers in the center of the room to clear the poison.")
+   
+ --------- 
   --Darkshade Caverns 2
 end
 
