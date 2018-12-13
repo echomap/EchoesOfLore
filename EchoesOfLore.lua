@@ -174,14 +174,15 @@ function EchoesOfLore.OnPlayerUnloaded(event)
   --
   local currMZIndx = GetCurrentMapZoneIndex()
   local currMZName = GetZoneNameByIndex(currMZIndx) 
-  EchoesOfLore.savedVariables.currMZIndex = currMZIndx
-  EchoesOfLore.savedVariables.currMZName = currMZName
   if(currMZName~=nil)then
+    EchoesOfLore.savedVariables.currMZIndex = currMZIndx
+    EchoesOfLore.savedVariables.currMZName  = currMZName
     d("Entered Zone: " .. currMZName )    
   else
     --[14:59] (EchoesOfLore) OnPlayerUnloaded: eventCode=589825
     --TODO still in same zone?
     --EchoesOfLore.savedVariables.currMZName
+    d("In Zone: " .. EchoesOfLore.savedVariables.currMZName )        
   end
   --GetMapIndexByZoneId(number zoneId) 
   --TODO find lore for zone

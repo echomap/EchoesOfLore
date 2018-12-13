@@ -32,7 +32,7 @@ end
 
 function EchoesOfLore:DoPrintText()
   if ( EchoesOfLore.view.textData ~= nil) then
-    if(EchoesOfLore.view.textData.text~-nil) then
+    if(EchoesOfLore.view.textData.text~=nil) then
       d(EchoesOfLore.view.textData.text)--TODO to channel?
     else
       d(EchoesOfLore.view.textData)
@@ -68,6 +68,8 @@ function EchoesOfLore:clearView()
     for index, value in ipairs(EchoesOfLore.view.buttons) do
       value:SetHidden(true)
     end
+  else
+    EchoesOfLore.view.buttons = {}
   end
 end
 
@@ -250,7 +252,7 @@ function EchoesOfLore:showViewArea2(area)
   EchoesOfLoreMain_TopSubRowArea_DropdownDBoss.comboBox = EchoesOfLoreMain_TopSubRowArea_DropdownDBoss.comboBox or ZO_ComboBox_ObjectFromContainer(EchoesOfLoreMain_TopSubRowArea_DropdownDBoss)
   local comboBox = EchoesOfLoreMain_TopSubRowArea_DropdownDBoss.comboBox
   comboBox:ClearItems()
-  comboBox:SetSortsItems(false)
+  comboBox:SetSortsItems(false)  
   local function OnItemSelect(_, choiceText, choice)
     EchoesOfLore:debugMsg(" choiceText=" .. tostring(choiceText) .. " choice=" .. tostring(choice) )  
     EchoesOfLore.view.area2selected = choiceText
@@ -279,21 +281,14 @@ function EchoesOfLore:showViewArea2(area)
     comboBox:AddItem(entry)
   end  
   
-  --buttons
-  --clear buttons
-  if(EchoesOfLore.view.buttons~=nil)then
-    for index, value in ipairs(EchoesOfLore.view.buttons) do
-      value:SetHidden(true)
-    end
-  end
+  EchoesOfLore:clearView()
   
-  if(area~=nil and EchoesOfLore.Zones[area]~=nil)then
+  --buttons
+  if(area~=nil and EchoesOfLore.Zones[area]~=nil)then    
     --for key, value in pairs(EchoesOfLore.Zones[area]) do
     for ii = 1, #validChoices do
       local key   = validChoices[ii]
       local value = EchoesOfLore.Zones[area][key]
-      --set buttons
-      EchoesOfLore.view.buttons = {}
       --for key,value in pairs(validChoices) do
       local item = validChoices[i]
       local s = EchoesOfLoreMain_SideContainer:GetNamedChild('_SetBtn_'..nr)
