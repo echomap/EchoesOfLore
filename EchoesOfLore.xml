@@ -128,6 +128,27 @@
         </Controls>
       </Control>
    
+      <Control name="$(parent)_TopSubRowArea" hidden="true" >
+        <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$(parent)_TopButtonRow" offsetY="0" offsetX="0" />
+        <Dimensions y="30" x="400"/>
+        <Controls> 
+          <Backdrop name="$(parent)_BG" inherits="ZO_DefaultBackdrop" centercolor="6495ED" alpha="0.6">
+            <AnchorFill/>
+          </Backdrop>  
+          <Control name="$(parent)_DropdownDBoss" inherits="ZO_ScrollableComboBox"  font="ZoFontCreditsText"
+                mouseEnabled="true" tier="HIGH" layer="2" horizontalAlignment="RIGHT" hidden="true" >
+            <Dimensions y="30" x="200" />
+            <Anchor point="TOPRIGHT" relativeTo="$(parent)" relativePoint="TOPRIGHT" offsetX="0" offsetY="0" />
+            <OnShow> </OnShow>
+          </Control>
+          <Control name="$(parent)_DropdownDName" inherits="ZO_ScrollableComboBox" font="ZoFontCreditsText"
+              mouseEnabled="true" tier="HIGH" layer="2" horizontalAlignment="RIGHT" >
+            <Dimensions y="30" x="200" />
+            <Anchor point="TOPRIGHT" relativeTo="$(parent)_DropdownDBoss" relativePoint="TOPLEFT" offsetX="0" offsetY="0" />
+            <OnShow> </OnShow>
+          </Control>
+        </Controls>
+      </Control>
       <Control name="$(parent)_TopSubRowDungeon" hidden="true" >
         <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" relativeTo="$(parent)_TopButtonRow" offsetY="0" offsetX="0" />
         <Dimensions y="30" x="400"/>

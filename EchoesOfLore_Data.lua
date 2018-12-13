@@ -3,6 +3,7 @@
 ----------------
 
 --The Data!
+EchoesOfLore.Zones = {}
 EchoesOfLore.Dungeons = {}
 
 --
@@ -52,8 +53,47 @@ function EchoesOfLore:setupBaseDungeon(dungeonName,description,isVetData,isDLC)
   end
 end
 
---
+
+function EchoesOfLore:setupZoneData(name,order,key,value)
+  if(EchoesOfLore.Zones[name]==nil)then
+    EchoesOfLore.Zones[name] = {}
+  end
+  if(EchoesOfLore.Zones[name][key]==nil)then
+    EchoesOfLore.Zones[name][key] = {
+        name  = key,
+        order = order,
+        value = value,
+    }
+  end
+end
+
+-- -- --
+-- -- -- 
 function EchoesOfLore:InitializeData()
+  EchoesOfLore:setupZones()
+  EchoesOfLore:setupDungeons()
+end
+
+function EchoesOfLore:setupZones()  
+  EchoesOfLore.Zones = {
+      ["Eastmarch"] = {}
+  }    
+  local name = "Eastmarch"
+  local bName, order = nil, 0  
+  
+  bName = "Description"
+  order = order+1
+  EchoesOfLore:setupZoneData(name,order,bName,"Eastmarch stretches from the frozen, jagged northern coastline into southern's Skyrim's volcanic tundra. The area features 16 Skyshards")
+  bName = "Overland Sets"
+  order = order+1
+  EchoesOfLore:setupZoneData(name,order,bName,"Akaviri Dragonguard Set, Fiord's Legacy Set, Stendarr's Embrace Set.")
+
+
+  ---------
+
+end
+
+function EchoesOfLore:setupDungeons()  
   EchoesOfLore.Dungeons = {
       ["Fungal Grotto 1"]   = { order=1 } ,
       ["Fungal Grotto 2"]   = { order=2 } ,
@@ -109,6 +149,7 @@ function EchoesOfLore:InitializeData()
   --DLC
   --EchoesOfLore:setupWhiteGoldTower()
 end
+
 
 -------
 -------
