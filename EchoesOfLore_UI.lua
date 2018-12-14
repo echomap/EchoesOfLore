@@ -210,8 +210,8 @@ function EchoesOfLore:showViewArea()
     EchoesOfLore:debugMsg(" choiceText=" .. choiceText .. " choice=" .. tostring(choice) )  
     --ElderScrollsOfAlts:doCharacterSelected(choiceText, choice) --getQualityDict()[choiceText])
     EchoesOfLore:clearView()
+    EchoesOfLore.view.areaselected = choiceText    
     EchoesOfLore:showViewArea2(choiceText)
-    EchoesOfLore.view.areaselected = choiceText
     PlaySound(SOUNDS.POSITIVE_CLICK)    
   end
   local validChoices = {} -- ElderScrollsOfAlts:ListOfCategories(true)
@@ -248,13 +248,13 @@ end
 
 --SHOW/Setup Area
 function EchoesOfLore:showViewArea2(area)
-  EchoesOfLore:debugMsg("showViewArea2= Area=" .. tostring(area) )  
+  EchoesOfLore:debugMsg("showViewArea2: Area=" .. tostring(area) )  
   EchoesOfLoreMain_TopSubRowArea_DropdownDBoss.comboBox = EchoesOfLoreMain_TopSubRowArea_DropdownDBoss.comboBox or ZO_ComboBox_ObjectFromContainer(EchoesOfLoreMain_TopSubRowArea_DropdownDBoss)
   local comboBox = EchoesOfLoreMain_TopSubRowArea_DropdownDBoss.comboBox
   comboBox:ClearItems()
   comboBox:SetSortsItems(false)  
   local function OnItemSelect(_, choiceText, choice)
-    EchoesOfLore:debugMsg(" choiceText=" .. tostring(choiceText) .. " choice=" .. tostring(choice) )  
+    EchoesOfLore:debugMsg("showViewArea2: choiceText=" .. tostring(choiceText) .. " choice=" .. tostring(choice) )  
     EchoesOfLore.view.area2selected = choiceText
     EchoesOfLore:SelectAreaText()    
     PlaySound(SOUNDS.POSITIVE_CLICK)    

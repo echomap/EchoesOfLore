@@ -54,15 +54,15 @@ function EchoesOfLore:setupBaseDungeon(dungeonName,description,isVetData,isDLC)
 end
 
 
-function EchoesOfLore:setupZoneData(name,order,key,value)
+function EchoesOfLore:setupZoneData(name,orderV,keyV,valueV)
   if(EchoesOfLore.Zones[name]==nil)then
     EchoesOfLore.Zones[name] = {}
   end
-  if(EchoesOfLore.Zones[name][key]==nil)then
-    EchoesOfLore.Zones[name][key] = {
-        name  = key,
-        order = order,
-        value = value,
+  if(EchoesOfLore.Zones[name][keyV]==nil)then
+    EchoesOfLore.Zones[name][keyV] = {
+        name  = keyV,
+        order = orderV,
+        value = valueV,
     }
   end
 end
@@ -76,19 +76,25 @@ end
 
 function EchoesOfLore:setupZones()  
   EchoesOfLore.Zones = {
-      ["Eastmarch"] = {}
-  }    
-  local name = "Eastmarch"
-  local bName, order = nil, 0  
-  
+  }      
+  local name, bName = nil
+  local order = 0
+  ---------
+  name = "Eastmarch"  
   bName = "Description"
   order = order+1
   EchoesOfLore:setupZoneData(name,order,bName,"Eastmarch stretches from the frozen, jagged northern coastline into southern's Skyrim's volcanic tundra. The area features 16 Skyshards")
   bName = "Overland Sets"
   order = order+1
   EchoesOfLore:setupZoneData(name,order,bName,"Akaviri Dragonguard Set, Fiord's Legacy Set, Stendarr's Embrace Set.")
-
-
+  ---------
+  name = "Betnikh"  
+  bName = "Description"
+  order = 1
+  EchoesOfLore:setupZoneData(name,order,bName,"This small island was originally under Breton control, however it is now occupied by Orcs. Betnikh can be reached by talking to the Boatswain Gilzir at the  north end of the Daggerfall Harbor District  in Glenumbra.")
+  bName = "Overland Sets"
+  order = order+1
+  EchoesOfLore:setupZoneData(name,order,bName,"Betnikh has the following Overland Sets: Armor of the Trainee Set.")
   ---------
 
 end

@@ -182,8 +182,22 @@ function EchoesOfLore.OnPlayerUnloaded(event)
     --[14:59] (EchoesOfLore) OnPlayerUnloaded: eventCode=589825
     --TODO still in same zone?
     --EchoesOfLore.savedVariables.currMZName
-    d("In Zone: " .. EchoesOfLore.savedVariables.currMZName )        
+    d("In Zone: " .. EchoesOfLore.savedVariables.currMZName ) 
+    currMZName = EchoesOfLore.savedVariables.currMZName
   end
+  if(currMZName~=nil)then
+    local area =  EchoesOfLore.Zones[currMZName]
+    if(area~=nil)then
+      local areaInfo =  area["Description"]
+      if(areaInfo~=nil)then
+        local areaVal  =  areaInfo.value
+        if(areaVal~=nil)then
+          d("LORE: "..areaVal)
+        end
+      end
+    end
+  end
+  
   --GetMapIndexByZoneId(number zoneId) 
   --TODO find lore for zone
   --TODO settings to not do this
@@ -199,7 +213,7 @@ function EchoesOfLore.OnAddOnLoaded(event, addonName)
     EchoesOfLore.savedVariables = ZO_SavedVars:New("EchoesOfLore_SavedVariables", 1, nil, defaultSettings)
 
     -- LMM Settings menu in Settings.lua.
-    EchoesOfLore.LoadSettings()    
+    EchoesOfLore.LoadSettings()  
 
     -- Slash commands must be lowercase. Set to nil to disable.
     SLASH_COMMANDS["/EchoesOfLore"] = EchoesOfLore.SlashCommandHandler
