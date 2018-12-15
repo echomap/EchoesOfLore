@@ -57,6 +57,7 @@ end
 function EchoesOfLore:setupZoneData(name,orderV,keyV,valueV)
   if(EchoesOfLore.Zones[name]==nil)then
     EchoesOfLore.Zones[name] = {}
+    --EchoesOfLore.Zones[name].name = name
   end
   if(EchoesOfLore.Zones[name][keyV]==nil)then
     EchoesOfLore.Zones[name][keyV] = {
@@ -95,6 +96,17 @@ function EchoesOfLore:setupZones()
   bName = "Overland Sets"
   order = order+1
   EchoesOfLore:setupZoneData(name,order,bName,"Betnikh has the following Overland Sets: Armor of the Trainee Set.")
+  ---------
+  name = "Stonefalls"  
+  bName = "Description"
+  order = 1
+  EchoesOfLore:setupZoneData(name,order,bName,"Stonefalls is a zone in central Morrowind. This diverse area features landscapes ranging from fungal forests to barren volcanic crags, and is home to the cities of Davon's Watch, Ebonheart and Kragenmoor.")
+  bName = "Overland Sets"
+  order = order+1
+  EchoesOfLore:setupZoneData(name,order,bName,"Stonefalls has the following Overland Sets: Shadow of the Red Mountain Set, Shalk Exoskeleton Set, Silks of the Sun Set.")
+  bName = "Lore"
+  order = order+1
+  EchoesOfLore:setupZoneData(name,order,bName,"In northern Zabamat lies the Ebonheart Pact-controlled Fort Virak, which protects the border with Skyrim from the wild creatures of Stonefalls such as the ferocious Alits and Kagouti. Also in Zabamat is the Fungal Grotto, the base of the Murkwater Goblins and a hidden shrine to Mephala. In Zabamat, the central region of Stonefalls, lies the city of Ebonheart, which is home to a large population of Argonians, who are highly distrustful of the Dunmer living in the city.")
   ---------
 
 end

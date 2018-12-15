@@ -8,6 +8,7 @@ function EchoesOfLore.InitializeUI()
   EchoesOfLore:InitializeData()
   --local EM, WM, SM, ICON, MARK, AVAIL_EQUIPMENT_CACHE = EVENT_MANAGER, WINDOW_MANAGER, SCENE_MANAGER, {}, {}, nil
   EchoesOfLore.WM = WINDOW_MANAGER
+  EOLTooltip:SetParent(PopupTooltipTopLevel)
 end
 
 --
@@ -39,7 +40,27 @@ function EchoesOfLore:DoPrintText()
     end
     --
     --
-    --
+  end
+end
+
+function EchoesOfLore:DoSearch(self)
+  if(self==nil)then
+    EchoesOfLore:debugMsg("DoSearch: Button method has self as nil?")
+  end
+  local s = EchoesOfLoreMain_TopSearchRow_SearchText
+  local text = s:GetText()
+  --TODO to channel?
+  EchoesOfLore:debugMsg("Search:" .. tostring(text) )
+  local viewName = EchoesOfLore.view.viewName 
+  
+  if(viewName==nil) then
+    EchoesOfLore:clearView()
+  elseif(viewName=="Dungeons")then
+    EchoesOfLore:showViewDungeon(text)
+  elseif(viewName=="Area")then
+    EchoesOfLore:showViewArea(text)
+  elseif(viewName=="Tips")then
+    EchoesOfLore:showViewTips(text)
   end
 end
 
@@ -57,6 +78,8 @@ function EchoesOfLore:ShowView(self,viewName)
     EchoesOfLore:showViewDungeon()
   elseif(viewName=="Area")then
     EchoesOfLore:showViewArea()
+  elseif(viewName=="Tips")then
+    EchoesOfLore:showViewTips()
   end
 end
 
@@ -74,7 +97,7 @@ function EchoesOfLore:clearView()
 end
 
 -- Create Dungeon List/dropdown
-function EchoesOfLore:showViewDungeon()
+function EchoesOfLore:showViewDungeon(optionalSearchText)
   EchoesOfLoreMain_TopSubRowDungeon:SetHidden(false)
   EchoesOfLoreMain_TopSubRowArea:SetHidden(true)
   EchoesOfLoreMain_SideContainer:SetHidden(false)
@@ -100,9 +123,13 @@ function EchoesOfLore:showViewDungeon()
   table.insert(validChoices, "_None"  )
   for k, v in pairs(EchoesOfLore.Dungeons) do
     if k ~= nil then
-      --d("List: dungeons " .. k .. " v="..tostring(v) )
-      --if(v.order~=nil)then d(" order="..tostring(v.order) ) end
-      table.insert(validChoices, k)
+      if( optionalSearchText~=nil) then
+        if( string.match(k, optionalSearchText) ) then --or string.match(v.description, optionalSearchText) )then
+          table.insert(validChoices, k)
+        end
+      else    
+        table.insert(validChoices, k)
+      end
     end
   end
   if(validChoices~=nil)then
@@ -120,6 +147,7 @@ function EchoesOfLore:showViewDungeon()
       comboBox:AddItem(entry)
     end
   end
+  --TODO? EchoesOfLore.view.dungeonselected = choiceText
   comboBox:SelectFirstItem()
   
   --
@@ -129,6 +157,7 @@ end
 --SHOW/Setup Dungeon BOSS dropdowns
 function EchoesOfLore:showViewDungeon2(dungeon)
   EchoesOfLore:debugMsg("showViewDungeon2= dungeon=" .. tostring(dungeon) )  
+  EchoesOfLore.view.dungeonselected = dungeon
   --EchoesOfLoreMain_TopSubRowDungeon_DropdownDBoss
   EchoesOfLoreMain_TopSubRowDungeon_DropdownDBoss.comboBox = EchoesOfLoreMain_TopSubRowDungeon_DropdownDBoss.comboBox or ZO_ComboBox_ObjectFromContainer(EchoesOfLoreMain_TopSubRowDungeon_DropdownDBoss)
   local comboBox = EchoesOfLoreMain_TopSubRowDungeon_DropdownDBoss.comboBox
@@ -175,29 +204,40 @@ function EchoesOfLore:showViewDungeon2(dungeon)
     d("EchoesOfLore: bad sort (Bosses)!")
   end
   ]]--
-
+  EchoesOfLore.view.bossselected = nil
   for i = 1, #validChoices do
     local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
+    if(EchoesOfLore.view.bossselected==nil) then EchoesOfLore.view.bossselected = validChoices[i] end
     comboBox:AddItem(entry)
   end
   comboBox:SelectFirstItem()
-  
-  --
+  EchoesOfLore:showDungeonText()   
+  --[[
   local sText = ""
-  if(EchoesOfLore.Dungeons[dungeon]~=nil and EchoesOfLore.Dungeons[dungeon].text~=nil)then
-    sText = EchoesOfLore.Dungeons[dungeon].text
-    EchoesOfLore:debugMsg("showViewDungeon2 set sText")    
+  if(EchoesOfLore.Dungeons[dungeon]~=nil and EchoesOfLore.Dungeons[dungeon].text~=nil and EchoesOfLore.Dungeons[dungeon].bosses~=nil )then
+    --sText = EchoesOfLore.Dungeons[dungeon].text
+    --EchoesOfLore:debugMsg("showViewDungeon2 trying to set text, sText="..tostring(sText) )
  
-    local bossesDataL = EchoesOfLore.Dungeons[dungeon].bosses[0]
-    if(bossesDataL~=nil)then
-      EchoesOfLore.view.dungeonselected = bossesDataL.bossName
+    local bkey, bvalue = next(EchoesOfLore.Dungeons[dungeon].bosses)
+    if(bkey~=nil)then
+      EchoesOfLore.view.bossselected = bkey--bossesDataL.bossName
       EchoesOfLore:showDungeonText()    
+    else
+      EchoesOfLore:debugMsg("showViewDungeon2 bossesDataL is nil?")
     end
   end
+  --]]
 end
 
 --
-function EchoesOfLore:showViewArea()
+function EchoesOfLore:showViewTips(optionalSearchText)
+  EchoesOfLoreMain_TopSubRowDungeon:SetHidden(true)
+  EchoesOfLoreMain_TopSubRowArea:SetHidden(false)
+  EchoesOfLoreMain_SideContainer:SetHidden(false)
+  --
+end
+--
+function EchoesOfLore:showViewArea(optionalSearchText)
   EchoesOfLoreMain_TopSubRowDungeon:SetHidden(true)
   EchoesOfLoreMain_TopSubRowArea:SetHidden(false)
   EchoesOfLoreMain_SideContainer:SetHidden(false)
@@ -220,9 +260,17 @@ function EchoesOfLore:showViewArea()
   table.insert(validChoices, "_None"  )
   for k, v in pairs(EchoesOfLore.Zones) do
     if k ~= nil then
-      --d("List: dungeons " .. k .. " v="..tostring(v) )
-      --if(v.order~=nil)then d(" order="..tostring(v.order) ) end
-      table.insert(validChoices, k)
+      --d("EOL k="..tostring(k) .." v=".. tostring(v) )
+      --for kk, vv in pairs(v) do
+        --d("---- kk=".. tostring(kk) .. "val=".. tostring(vv) )  
+      --end
+      if( optionalSearchText~=nil) then
+        if( string.match(k, optionalSearchText) ) then --or string.match(v.description, optionalSearchText) )then
+          table.insert(validChoices, k)
+        end
+      else    
+        table.insert(validChoices, k)
+      end
     end
   end
   if(validChoices~=nil)then
@@ -500,6 +548,7 @@ function EchoesOfLore:showDungeonText()
     d("EchoesOfLore: Bad sort (Buttons)!")
   end
   ]]--
+  local btnToAutoSelect = nil
   EchoesOfLore.view.buttons = {}
   for key,value in pairs(validChoices) do
     --EchoesOfLore:debugMsg("key="..tostring(key) .. " value="..tostring(value))
@@ -540,15 +589,17 @@ function EchoesOfLore:showDungeonText()
     s:SetText(value.name)
     s:SetHidden(false)
     EchoesOfLore.view.buttons[nr] = s
+    if(btnToAutoSelect==nil) then btnToAutoSelect = s end
     nr = nr + 1
   end
+  EchoesOfLore:SelectBossText(btnToAutoSelect)
 
 end
 
 function EchoesOfLore:SelectBossText(self)
   --Use Text of button and selected dungeon and boss to get longtext
   if(self==nil)then
-    d("Button method has self as nil?")
+    EchoesOfLore:debugMsg("Button method has self as nil?")
     return
   end
   
@@ -688,4 +739,12 @@ function EchoesOfLore:combineText(var1,var2,var3,var4,var5,var6)
     return sText
 end
 
-
+--TOOLTIP
+function EchoesOfLore:Misc2HeaderTipEnter(sender,key)
+  InitializeTooltip(EOLTooltip, sender, TOPLEFT, 5, -56, TOPRIGHT)
+  EOLTooltip:AddLine(key, "ZoFontHeader3")
+end
+function EchoesOfLore:Misc2HeaderTipExit(sender)
+  --ClearTooltip(InformationTooltip)
+  ClearTooltip(EOLTooltip)
+end
