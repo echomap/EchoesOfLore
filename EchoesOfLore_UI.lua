@@ -67,9 +67,10 @@ end
 
 --
 function EchoesOfLore:ShowView(self,viewName)
-  EchoesOfLore:debugMsg("ShowView Called!")  
+  EchoesOfLore:debugMsg("ShowView Called! viewName="..tostring(viewName) )
   EchoesOfLoreMain_TopSubRowDungeon:SetHidden(true)
   EchoesOfLoreMain_TopSubRowArea:SetHidden(true)
+  EchoesOfLoreMain_TopSubRowTips:SetHidden(true)
   EchoesOfLoreMain_SideContainer:SetHidden(true)
   EchoesOfLore.view.viewName = viewName
   if(viewName==nil) then
@@ -94,6 +95,124 @@ function EchoesOfLore:clearView()
   else
     EchoesOfLore.view.buttons = {}
   end
+end
+
+function EchoesOfLore:showViewTips(optionalSearchText)
+  EchoesOfLore:debugMsg("showViewTips: Called")
+  EchoesOfLoreMain_TopSubRowTips:SetHidden(false)
+  EchoesOfLoreMain_SideContainer:SetHidden(false)
+
+  EchoesOfLoreMain_TopSubRowTips_DropdownDName.comboBox = EchoesOfLoreMain_TopSubRowTips_DropdownDName.comboBox or ZO_ComboBox_ObjectFromContainer(EchoesOfLoreMain_TopSubRowTips_DropdownDName)
+  local comboBox = EchoesOfLoreMain_TopSubRowTips_DropdownDName.comboBox
+  comboBox:ClearItems()
+  comboBox:SetSortsItems(true)
+  local function OnItemSelect1(_, choiceText, choice)
+    EchoesOfLore:debugMsg(" choiceText=" .. choiceText .. " choice=" .. tostring(choice) )  
+    --ElderScrollsOfAlts:doCharacterSelected(choiceText, choice) --getQualityDict()[choiceText])
+    EchoesOfLore:clearView()
+    EchoesOfLore.view.tipsselected = choiceText
+    EchoesOfLore:showViewTips2(choiceText)
+    PlaySound(SOUNDS.POSITIVE_CLICK)    
+  end
+  local validChoices = {}
+  table.insert(validChoices, "_None"  )
+  for k, v in pairs(EchoesOfLore.Tips) do
+    EchoesOfLore:debugMsg("showViewTips: k="..tostring(k))
+    if k ~= nil then
+      if( optionalSearchText~=nil) then
+        if( string.match(k, optionalSearchText) or string.match(v.short, optionalSearchText) )then
+          table.insert(validChoices, k)
+        end
+      else    
+        table.insert(validChoices, k)
+      end
+    end
+  end
+  if(validChoices~=nil)then
+    for i = 1, #validChoices do
+      local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect1)
+      comboBox:AddItem(entry)
+    end
+  end
+  comboBox:SelectFirstItem()
+  
+  --
+  EchoesOfLore:showViewTips2()
+end
+
+--Setup 2nd dropdown
+function EchoesOfLore:showViewTips2(tips)
+  EchoesOfLore:debugMsg("showViewTips2: tips='" .. tostring(tips).."'" )  
+  EchoesOfLore.view.tipsselected = tips
+  EchoesOfLoreMain_TopSubRowTips_DropdownDBoss.comboBox = EchoesOfLoreMain_TopSubRowTips_DropdownDBoss.comboBox or ZO_ComboBox_ObjectFromContainer(EchoesOfLoreMain_TopSubRowTips_DropdownDBoss)
+  local comboBox = EchoesOfLoreMain_TopSubRowTips_DropdownDBoss.comboBox
+  comboBox:ClearItems()
+  comboBox:SetSortsItems(false)
+  local function OnItemSelect(_, choiceText, choice)
+    EchoesOfLore:debugMsg(" choiceText=" .. tostring(choiceText) .. " choice=" .. tostring(choice) )  
+    --ElderScrollsOfAlts:doCharacterSelected(choiceText, choice) --getQualityDict()[choiceText])
+    EchoesOfLore.view.tips2selected = choiceText
+    EchoesOfLore:ShowTipsText()    
+    PlaySound(SOUNDS.POSITIVE_CLICK)    
+  end
+  local validChoices = {}
+  if(tips~=nil)then
+    if(EchoesOfLore.Tips[tips]~=nil)then
+      for k, v in pairs(EchoesOfLore.Tips[tips]) do
+        if k ~= nil then
+          if(v.order==nil)then v.order = #validChoices end
+          if(validChoices[v.order]~=nil) then
+            v.order = v.order+1
+          end
+          validChoices[ v.order ] = k
+        end
+      end
+    end
+  end
+  EchoesOfLore.view.tips2selected = nil
+  for i = 1, #validChoices do
+    local entry = comboBox:CreateItemEntry(validChoices[i], OnItemSelect)
+    if(EchoesOfLore.view.tips2selected==nil) then EchoesOfLore.view.tips2selected = validChoices[i] end
+    comboBox:AddItem(entry)
+  end
+  comboBox:SelectFirstItem()
+  EchoesOfLore:ShowTipsText()   
+end
+
+--Show text from second dropdown's selection
+function EchoesOfLore:ShowTipsText(self)
+  --
+  local tips = EchoesOfLore.view.tipsselected
+  EchoesOfLore:debugMsg("SelectTipsText: tips=" .. tostring(tips) )  
+  if(tips==nil)then
+    EchoesOfLore:debugMsg("SelectTipsText: tips is nil!")
+    return
+  end
+  local tipsData = EchoesOfLore.Tips[tips]
+  if(tipsData==nil)then  
+    EchoesOfLore:debugMsg("SelectBossText tipsData is nil!")
+    return
+  end
+  --
+  local tips2 = EchoesOfLore.view.tips2selected
+  if(tips2==nil)then
+    EchoesOfLore:debugMsg("SelectTipsText: tips2 is nil!")
+    return
+  end  
+  EchoesOfLore:debugMsg("SelectTipsText: tips2=" .. tostring(tips2) )  
+  local tips2Data = EchoesOfLore.Tips[tips][tips2]
+  if(tips2Data==nil)then
+    EchoesOfLore:debugMsg("SelectTipsText: tips2Data is nil!")
+    return
+  end  
+  local textData = EchoesOfLore.Tips[tips][tips2].text
+  if(textData==nil)then
+    EchoesOfLore:debugMsg("SelectTipsText: textData is nil!")
+    return
+  end
+  EchoesOfLore:GetOrCreateTextBox(textData)
+  EchoesOfLore.view.textData = textData
+  --EchoesOfLore:ShowTextBox(textData)  
 end
 
 -- Create Dungeon List/dropdown
@@ -229,13 +348,6 @@ function EchoesOfLore:showViewDungeon2(dungeon)
   --]]
 end
 
---
-function EchoesOfLore:showViewTips(optionalSearchText)
-  EchoesOfLoreMain_TopSubRowDungeon:SetHidden(true)
-  EchoesOfLoreMain_TopSubRowArea:SetHidden(false)
-  EchoesOfLoreMain_SideContainer:SetHidden(false)
-  --
-end
 --
 function EchoesOfLore:showViewArea(optionalSearchText)
   EchoesOfLoreMain_TopSubRowDungeon:SetHidden(true)

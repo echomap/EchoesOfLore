@@ -53,11 +53,12 @@ function EchoesOfLore:setupBaseDungeon(dungeonName,description,isVetData,isDLC)
   end
 end
 
-
 function EchoesOfLore:setupZoneData(name,orderV,keyV,valueV)
+  if(EchoesOfLore.Zones==nil)then
+    EchoesOfLore.Zones = {}
+  end
   if(EchoesOfLore.Zones[name]==nil)then
     EchoesOfLore.Zones[name] = {}
-    --EchoesOfLore.Zones[name].name = name
   end
   if(EchoesOfLore.Zones[name][keyV]==nil)then
     EchoesOfLore.Zones[name][keyV] = {
@@ -68,16 +69,57 @@ function EchoesOfLore:setupZoneData(name,orderV,keyV,valueV)
   end
 end
 
+--DataFormat: EchoesOfLore.Tips["PVP"]["Golden Vendor"] = "The golden vendor is at..."
+function EchoesOfLore:setupTipData(parentV,nameV,shortV,orderV,textV)
+  EchoesOfLore:debugMsg("setupTipData: parentV='"..parentV.."' nameV='"..nameV.."'" )  
+  if(EchoesOfLore.Tips==nil)then
+    EchoesOfLore.Tips = {}
+  end
+  if(EchoesOfLore.Tips[parentV]==nil)then
+    EchoesOfLore.Tips[parentV] = {}
+  end
+  EchoesOfLore.Tips[parentV][nameV] = {
+      parentV=parentV,
+      name  = nameV,
+      order = orderV,
+      text  = textV,
+      short = shortV,
+  }
+end
+
 -- -- --
 -- -- -- 
 function EchoesOfLore:InitializeData()
   EchoesOfLore:setupZones()
   EchoesOfLore:setupDungeons()
+  EchoesOfLore:SetupTips()
+end
+
+function EchoesOfLore:SetupTips()
+  local parent, name, short = nil
+  local order = 0
+  ---------
+  order = 0
+  parent = "PVP"
+  name   = "Golden Vendor"  
+  short  = "golden vendor"
+  order  = order+1
+  --parentV,nameV,shortV,orderV,textV)
+  EchoesOfLore:setupTipData(parent,name,short,order,"The golden vendor is in one of the two starting bases of your pvp faction in cyrodil")
+  ---------
+  order = 0
+  parent = "General"
+  name   = "Mounts"
+  short  = "mount mounts horse ride vehicle"
+  order  = order+1
+  --parentV,nameV,shortV,orderV,textV)
+  EchoesOfLore:setupTipData(parent,name,short,order,"Mounts are found in your collections (U) and are bound to the (H) key.")
+  ---------
+  
+  
 end
 
 function EchoesOfLore:setupZones()  
-  EchoesOfLore.Zones = {
-  }      
   local name, bName = nil
   local order = 0
   ---------
