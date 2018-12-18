@@ -6,6 +6,9 @@ local localization_strings = {
     SI_BINDING_NAME_EOL_DISPLAY  = "Display EchoesOfLore",
     EchoesOfLore_EOL_DISPLAY     = "Display EchoesOfLore",
     EchoesOfLore_EOL_DISPLAY2     = "Display EchoesOfLore",
+    SI_EOL_ENTERED_ZONE   = "Entered Zone: <<1>>",
+    SI_EOL_IN_ZONE        = "In Zone: <<1>>",
+    SI_EOL_REENTERED_ZONE = "Rentered Zone: <<1>>",
 }
 
 for stringId, stringValue in pairs(localization_strings) do

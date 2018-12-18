@@ -2,7 +2,7 @@
 ## Version: 0.0.1
 ## APIVersion: 100024, 100025
 ## Author: Echomap
-## Description: EchoesOfLore... 
+## Description: EchoesOfLore... will show area lore, dungeon boss hints, and newbie tips
 ## SavedVariables: EchoesOfLore_SavedVariables
 ## DependsOn: LibStub LibAddonMenu-2.0
 

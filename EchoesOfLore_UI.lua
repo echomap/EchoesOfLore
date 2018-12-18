@@ -15,6 +15,7 @@ end
 function EchoesOfLore.ToggleGui()
   if( EchoesOfLoreMain:IsHidden()) then
     EchoesOfLoreMain:SetHidden(false)
+    --EchoesOfLoreMain_TopSearchRow_SearchText:TakeFocus()
   else
     EchoesOfLoreMain:SetHidden(true)
   end

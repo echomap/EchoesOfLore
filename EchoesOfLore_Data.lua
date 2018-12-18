@@ -4,6 +4,7 @@
 
 --The Data!
 EchoesOfLore.Zones = {}
+EchoesOfLore.SubZones = {}
 EchoesOfLore.Dungeons = {}
 
 --
@@ -69,6 +70,25 @@ function EchoesOfLore:setupZoneData(name,orderV,keyV,valueV)
   end
 end
 
+function EchoesOfLore:setupSubZoneData(subzoneId,nameV,orderV,keyV,valueV)
+  if(EchoesOfLore.SubZones==nil)then
+    EchoesOfLore.SubZones = {}
+  end
+  local key = string.format("%s-%d",nameV,subzoneId)
+  if(EchoesOfLore.SubZones[key]==nil)then
+    EchoesOfLore.SubZones[key] = {}
+  end
+  if(EchoesOfLore.SubZones[key][keyV]==nil)then
+    EchoesOfLore.SubZones[key][keyV] = {
+        name  = nameV,
+        key   = keyV,
+        id    = subzoneId,
+        order = orderV,
+        value = valueV,
+    }
+  end
+end
+
 --DataFormat: EchoesOfLore.Tips["PVP"]["Golden Vendor"] = "The golden vendor is at..."
 function EchoesOfLore:setupTipData(parentV,nameV,shortV,orderV,textV)
   EchoesOfLore:debugMsg("setupTipData: parentV='"..parentV.."' nameV='"..nameV.."'" )  
@@ -91,6 +111,7 @@ end
 -- -- -- 
 function EchoesOfLore:InitializeData()
   EchoesOfLore:setupZones()
+  EchoesOfLore:setupSubZones()
   EchoesOfLore:setupDungeons()
   EchoesOfLore:SetupTips()
 end
@@ -107,6 +128,8 @@ function EchoesOfLore:SetupTips()
   --parentV,nameV,shortV,orderV,textV)
   EchoesOfLore:setupTipData(parent,name,short,order,"The golden vendor is in one of the two starting bases of your pvp faction in cyrodil")
   ---------
+  
+  ---------
   order = 0
   parent = "General"
   name   = "Mounts"
@@ -115,10 +138,45 @@ function EchoesOfLore:SetupTips()
   --parentV,nameV,shortV,orderV,textV)
   EchoesOfLore:setupTipData(parent,name,short,order,"Mounts are found in your collections (U) and are bound to the (H) key.")
   ---------
-  
+  parent = "General"
+  name   = "Food and Drink"
+  short  = "food and drink"
+  order  = order+1
+  --parentV,nameV,shortV,orderV,textV)
+  EchoesOfLore:setupTipData(parent,name,short,order,"You can NOT have a food and drink buff active at the same time. You can use a potion while under the effects of either though.")
+  ---------
   
 end
 
+function EchoesOfLore:setupSubZones()  
+  local name, bName = nil
+  local subzoneId, order = 0
+  ---------
+  name = "Temple of the Eight" 
+  subzoneId = 7422
+  bName = "Description"
+  order = 0
+  EchoesOfLore:setupSubZoneData(subzoneId,name,order,bName,"The Temple of the Eight is an old temple in central Grahtwood, northwest of Elden Root. The temple is home to a special crafting site, where you may craft items in the Armor of the Seducer set. It is guarded by the Brackenleaf's Briars, and an Orc named Agstarg resides within the Divine Sanctum.")
+  ---------
+  name = "Bergama" 
+  subzoneId = 7531
+  bName = "Description"
+  order = 0
+  EchoesOfLore:setupSubZoneData(subzoneId,name,order,bName,"Bergama is a city in western Hammerfell, best known for being an enclave of the Alik'r Desert.")
+  ---------
+  ---------
+  name = "Alcaire Castle" 
+  subzoneId = 11
+  bName = "Description"
+  order = order+1
+  EchoesOfLore:setupSubZoneData(subzoneId,name,order,bName,"Alcaire Castle is a castle in northwestern Stormhaven. It is ruled over by Duke Nathaniel and is where he and his wife, Duchess Lakana, make their home. Many Knights of the Flame also reside here as the protectors of the Duke and Duchess. The Dukes of Alcaire have been ruling over western Stormhaven since the late First Era.")
+
+  ---------
+  ---------
+  ---------
+  ---------
+end
+  
 function EchoesOfLore:setupZones()  
   local name, bName = nil
   local order = 0
@@ -150,7 +208,39 @@ function EchoesOfLore:setupZones()
   order = order+1
   EchoesOfLore:setupZoneData(name,order,bName,"In northern Zabamat lies the Ebonheart Pact-controlled Fort Virak, which protects the border with Skyrim from the wild creatures of Stonefalls such as the ferocious Alits and Kagouti. Also in Zabamat is the Fungal Grotto, the base of the Murkwater Goblins and a hidden shrine to Mephala. In Zabamat, the central region of Stonefalls, lies the city of Ebonheart, which is home to a large population of Argonians, who are highly distrustful of the Dunmer living in the city.")
   ---------
-
+  name = "Shadowfen"  
+  bName = "Description"
+  order = 1
+  EchoesOfLore:setupZoneData(name,order,bName,"On the border with Morrowind, the Shadowfen region has had more contact with Tamrielic civilization than most of Black Marsh—due primarily to the activities of the Dunmeri slavers who once operated out of the city of Stormhold. Now the Argonians are back in charge.")
+  bName = "Lore"
+  order = order+1
+  EchoesOfLore:setupZoneData(name,order,bName,"It is a fetid mire, often fought over by the Imperial Legion and Dunmer slavers. The ancient city of Stormhold is located here, the source of the devastating (to non-Argonians) Knahaten Flu. Though the practice of Argonian slavery was abandoned when Black Marsh joined the Ebonheart Pact, rogue Dunmeri slave traders can still be found roaming the marshes. Hist trees and ruined temples can also be found along the winding channels and dank foliage.")
+  bName = "Overland Sets"
+  order = order+1
+  EchoesOfLore:setupZoneData(name,order,bName,"Shadowfen has the following Overland Sets: Hatchling's Shell Set, Robes of the Hist Set, Swamp Raider Set.")
+  
+  ---------
+  name = "Alik'r Desert"  
+  bName = "Description"
+  order = 1
+  EchoesOfLore:setupZoneData(name,order,bName, "An arid wasteland where ancient ruins and deadly creatures lie hidden in the shifting sands. This area has 16 Skyshards and 3 achivements.")
+  bName = "Overland Sets"
+  order = order+1
+  EchoesOfLore:setupZoneData(name,order,bName,"Alik'r Desert has the following Overland Sets: Order of Diagna Set, Robes of the Withered Hand Set, Sword-Singer Set.")
+  ---------
+  
+  name = "Summerset"  
+  bName = "Description"
+  order = 1
+  EchoesOfLore:setupZoneData(name,order,bName, "Out of the three main islands, Summerset is the largest, and also contains the capital of the Summerset Isles, Alinor. To the east of Summerset is Auridon, which is closer to Tamriel and is the second largest of the three islands. The Isle of Artaeum used to be on Nirn, but has since vanished, though can still be visited..")
+  bName = "Overland Sets"
+  order = order+1
+  EchoesOfLore:setupZoneData(name,order,bName,"Summerset has the following Overland Sets: Wisdom of Vanus , Gryphon’s Ferocity, Grace of Gloom.")
+  
+  
+  
+  ---------
+  
 end
 
 function EchoesOfLore:setupDungeons()  
