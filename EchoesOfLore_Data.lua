@@ -184,7 +184,7 @@ function EchoesOfLore:setupZones()
   name = "Eastmarch"  
   bName = "Description"
   order = order+1
-  EchoesOfLore:setupZoneData(name,order,bName,"Eastmarch stretches from the frozen, jagged northern coastline into southern's Skyrim's volcanic tundra. The area features 16 Skyshards")
+  EchoesOfLore:setupZoneData(name,order,bName,"Eastmarch stretches from the frozen, jagged northern coastline into southern's Skyrim's volcanic tundra. Eastmarch is one of the nine Holds of Skyrim, located along the eastern border. It is one of the four oldest holds in Skyrim, known collectively as Old Holds.")
   bName = "Overland Sets"
   order = order+1
   EchoesOfLore:setupZoneData(name,order,bName,"Akaviri Dragonguard Set, Fiord's Legacy Set, Stendarr's Embrace Set.")
@@ -228,7 +228,6 @@ function EchoesOfLore:setupZones()
   order = order+1
   EchoesOfLore:setupZoneData(name,order,bName,"Alik'r Desert has the following Overland Sets: Order of Diagna Set, Robes of the Withered Hand Set, Sword-Singer Set.")
   ---------
-  
   name = "Summerset"  
   bName = "Description"
   order = 1
@@ -236,8 +235,26 @@ function EchoesOfLore:setupZones()
   bName = "Overland Sets"
   order = order+1
   EchoesOfLore:setupZoneData(name,order,bName,"Summerset has the following Overland Sets: Wisdom of Vanus , Gryphon’s Ferocity, Grace of Gloom.")
+    ---------
+  name = "Reaper's Marsh"  
+  bName = "Description"
+  order = 1
+  EchoesOfLore:setupZoneData(name,order,bName, "Once known simply as Northern Valenwood, this region that borders Cyrodiil and Elsweyr has seen so much bloody warfare since the fall of the Second Empire that it's now known as Reaper's March, even to its battle-scarred inhabitants.")
+  bName = "Overland Sets"
+  order = order+1
+  EchoesOfLore:setupZoneData(name,order,bName,"Reaper's March has the following Overland Sets: Senche's Bite Set, Skooma Smuggler Set and Soulshine Set.")
+  ---------
+  name = "Bleakrock"
+  bName = "Description"
+  order = 1
+  EchoesOfLore:setupZoneData(name,order,bName, "Bleakrock is an island off the coast of Skyrim between Windhelm and Solstheim. The hardy Nords who inhabit Bleakrock are mostly farmers and fisherfolk. A small contingent of Pact soldiers keeps a sharp lookout for pirates and raiders.")
+  ---------
+  name = "Auridon"
+  bName = "Description"
+  order = 1
+  EchoesOfLore:setupZoneData(name,order,bName, "The second largest of the Summerset Isles, Auridon has always served the High Elves as a buffer between their serene archipelago and the turmoil of Tamriel. The Altmer of Auridon have been hardened by generations of repelling invaders, pirates and plagues.")
   
-  
+  ---------
   
   ---------
   
