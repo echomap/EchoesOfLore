@@ -192,7 +192,8 @@ function EchoesOfLore:setupZones()
   name = "Betnikh"  
   bName = "Description"
   order = 1
-  EchoesOfLore:setupZoneData(name,order,bName,"This small island was originally under Breton control, however it is now occupied by Orcs. Betnikh can be reached by talking to the Boatswain Gilzir at the  north end of the Daggerfall Harbor District  in Glenumbra.")
+  --http://elderscrolls.wikia.com/wiki/Loading_Screens_(Online)
+  EchoesOfLore:setupZoneData(name,order,bName,"Nine generations ago, the island of Betony was conquered by the Stonetooth Orcs, who renamed it Betnikh. A proud, self-reliant people, Orcs fiercely protect their new home from incursions by outsiders. This small island was originally under Breton control, however it is now occupied by Orcs.")
   bName = "Overland Sets"
   order = order+1
   EchoesOfLore:setupZoneData(name,order,bName,"Betnikh has the following Overland Sets: Armor of the Trainee Set.")
@@ -252,6 +253,7 @@ function EchoesOfLore:setupZones()
   name = "Auridon"
   bName = "Description"
   order = 1
+  --http://elderscrolls.wikia.com/wiki/Loading_Screens_(Online)
   EchoesOfLore:setupZoneData(name,order,bName, "The second largest of the Summerset Isles, Auridon has always served the High Elves as a buffer between their serene archipelago and the turmoil of Tamriel. The Altmer of Auridon have been hardened by generations of repelling invaders, pirates and plagues.")
   
   ---------

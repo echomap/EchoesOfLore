@@ -170,14 +170,24 @@ function EchoesOfLore.OnPlayerLoaded(eventCode, initial)
     else
       d( zo_strformat(GetString(SI_EOL_REENTERED_ZONE), currMZName ) )          
     end
-  else
+  elseif(currMZName~=nil)then
     d("currMZIndx = ".. currMZIndx)
     --[14:59] (EchoesOfLore) OnPlayerUnloaded: eventCode=589825
     --TODO still in same zone?
     --EchoesOfLore.savedVariables.currMZName
     d( zo_strformat(GetString(SI_EOL_IN_ZONE), currMZName ) )          
     currMZName = EchoesOfLore.savedVariables.currMZName
+  else
+    d("Entered zone... unknown?")
   end
+  
+  if(EchoesOfLore.Dungeons[currMZName]~=nil)then
+    if( EchoesOfLoreMain:IsHidden()) then
+      EchoesOfLore:showViewDungeon(currMZName)
+      EchoesOfLore.view.dungeonselected = currMZName
+    end
+  end 
+  --Dungeon OnEventZoneChange: eventCode=131257, zoneName=, subZoneName=Wayrest Sewers, newSubzone=, zoneId=0, subZoneId=993
  
   --GetMapIndexByZoneId(number zoneId) 
   --TODO find lore for zone
