@@ -161,7 +161,7 @@ function EchoesOfLore.OnPlayerLoaded(eventCode, initial)
   local currMZIndx = GetCurrentMapZoneIndex()
   local currMZName = GetZoneNameByIndex(currMZIndx) 
   local oldMZIndx = EchoesOfLore.savedVariables.currMZIndex
-  if(currMZName~=nil)then
+  if(currMZName~=nil and currMZName~="")then
     EchoesOfLore.savedVariables.currMZIndex = currMZIndx
     EchoesOfLore.savedVariables.currMZName  = currMZName    
     if(oldMZIndx ~= EchoesOfLore.savedVariables.currMZIndex)then
@@ -170,7 +170,7 @@ function EchoesOfLore.OnPlayerLoaded(eventCode, initial)
     else
       d( zo_strformat(GetString(SI_EOL_REENTERED_ZONE), currMZName ) )          
     end
-  elseif(currMZName~=nil)then
+  elseif(currMZName~=nil and currMZName~="")then
     d("currMZIndx = ".. currMZIndx)
     --[14:59] (EchoesOfLore) OnPlayerUnloaded: eventCode=589825
     --TODO still in same zone?

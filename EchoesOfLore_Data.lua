@@ -137,13 +137,42 @@ function EchoesOfLore:SetupTips()
   order  = order+1
   --parentV,nameV,shortV,orderV,textV)
   EchoesOfLore:setupTipData(parent,name,short,order,"Mounts are found in your collections (U) and are bound to the (H) key.")
+  
+  name   = "Research"
+  short  = "research deconstruct"
+  order  = order+1
+  EchoesOfLore:setupTipData(parent,name,short,order,"Pick up items (weapons, clothing)even if you aren't going to equip it so you can deconstruct or research traits.")
+  name   = "Train your horse"
+  short  = "train horse speed mount"
+  order  = order+1
+  EchoesOfLore:setupTipData(parent,name,short,order," Train your horse daily for speed .")
+  name   = "Quest"
+  short  = "quests main quest"
+  order  = order+1
+  EchoesOfLore:setupTipData(parent,name,short,order,"Open your quest log and run the main quest, it gives you lore and skill points.")
+  
   ---------
-  parent = "General"
   name   = "Food and Drink"
   short  = "food and drink"
   order  = order+1
   --parentV,nameV,shortV,orderV,textV)
   EchoesOfLore:setupTipData(parent,name,short,order,"You can NOT have a food and drink buff active at the same time. You can use a potion while under the effects of either though.")
+  name   = "Free food"
+  short  = "food free"
+  order  = order+1
+  EchoesOfLore:setupTipData(parent,name,short,order,"free food is everywhere, open everything, careful of stealing though.")  
+  name   = "Bag space"
+  short  = "bags bank space carry"
+  order  = order+1
+  EchoesOfLore:setupTipData(parent,name,short,order,"You can upgrade your bag at a Pack Merchant in town.")  
+  name   = "Theft"
+  short  = "theft theiving thieve money"
+  order  = order+1
+  EchoesOfLore:setupTipData(parent,name,short,order,"Theft is very lucrative (Guards can NOT be killed).")  
+  name   = "Levelling money/gear"
+  short  = "research deconstruct"
+  order  = order+1
+  EchoesOfLore:setupTipData(parent,name,short,order,"Don't sweat too much about money and gear and specs while levelling.")  
   ---------
   
 end
