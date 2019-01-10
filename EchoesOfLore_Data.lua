@@ -147,21 +147,26 @@ function EchoesOfLore:SetupTips()
   order  = order+1
   --parentV,nameV,shortV,orderV,textV)
   EchoesOfLore:setupTipData(parent,name,short,order,"Mounts are found in your collections (U) and are bound to the (H) key. You will now get one at level 10.")
-  
   name   = "Research"
   short  = "research deconstruct"
   order  = order+1
   EchoesOfLore:setupTipData(parent,name,short,order,"Pick up items (weapons, clothing)even if you aren't going to equip it so you can deconstruct or research traits.")
-  
   name   = "Train your horse"
   short  = "train horse speed mount"
   order  = order+1
-  EchoesOfLore:setupTipData(parent,name,short,order," Train your horse daily for speed .")
-  
+  EchoesOfLore:setupTipData(parent,name,short,order,"Train your horse daily for speed .")
+  name   = "Skills"
+  short  = "skills leveling levelling start"
+  order  = order+1
+  EchoesOfLore:setupTipData(parent,name,short,order,"When you start out go ahead and pick a skill from each class skill line so that they level up the line. Then you can make sure to level up your chosen weapon and armor, and any guilds.")
   name   = "Quest"
   short  = "quests main quest"
   order  = order+1
   EchoesOfLore:setupTipData(parent,name,short,order,"Open your quest log and run the main quest, it gives you lore and skill points.")
+  name   = "Champion Points"
+  short  = "champion points leveling endgame end start"
+  order  = order+1
+  EchoesOfLore:setupTipData(parent,name,short,order,"Champoin points (cp) are what you earn after levelling is done at cap, currently 50. Your CP level is for your account and is available to all your characters to spend for themselves, but is earned only by level 50 characters, so any of your level 50's can earn them for the account to use.")
   
   ---------
   name   = "Food and Drink"
@@ -182,7 +187,7 @@ function EchoesOfLore:SetupTips()
   short  = "theft theiving thieve money"
   order  = order+1
   EchoesOfLore:setupTipData(parent,name,short,order,"Theft is very lucrative (Guards can NOT be killed).")
-  name   = "Levelling"
+  name   = "Leveling"
   short  = "level money gear spec respec"
   order  = order+1
   EchoesOfLore:setupTipData(parent,name,short,order,"Don't sweat too much about money and gear and specs while levelling.")  
