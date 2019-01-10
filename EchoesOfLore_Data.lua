@@ -120,32 +120,44 @@ function EchoesOfLore:SetupTips()
   local parent, name, short = nil
   local order = 0
   ---------
+  ---------
   order = 0
   parent = "PVP"
+  ---------
   name   = "Golden Vendor"  
   short  = "golden vendor"
   order  = order+1
   --parentV,nameV,shortV,orderV,textV)
   EchoesOfLore:setupTipData(parent,name,short,order,"The golden vendor is in one of the two starting bases of your pvp faction in cyrodil")
-  ---------
+  parent = "PVP"
+  name   = "Cyrodil"  
+  short  = "cyrodil Cyrodil pvp alliance"
+  order  = order+1
+  --parentV,nameV,shortV,orderV,textV)
+  EchoesOfLore:setupTipData(parent,name,short,order,"Use the alliance menu (L) to set a home or guest region and enter cyrodil via right clicking and entering the campaign.")
+  
   
   ---------
   order = 0
   parent = "General"
+  ---------
+
   name   = "Mounts"
   short  = "mount mounts horse ride vehicle"
   order  = order+1
   --parentV,nameV,shortV,orderV,textV)
-  EchoesOfLore:setupTipData(parent,name,short,order,"Mounts are found in your collections (U) and are bound to the (H) key.")
+  EchoesOfLore:setupTipData(parent,name,short,order,"Mounts are found in your collections (U) and are bound to the (H) key. You will now get one at level 10.")
   
   name   = "Research"
   short  = "research deconstruct"
   order  = order+1
   EchoesOfLore:setupTipData(parent,name,short,order,"Pick up items (weapons, clothing)even if you aren't going to equip it so you can deconstruct or research traits.")
+  
   name   = "Train your horse"
   short  = "train horse speed mount"
   order  = order+1
   EchoesOfLore:setupTipData(parent,name,short,order," Train your horse daily for speed .")
+  
   name   = "Quest"
   short  = "quests main quest"
   order  = order+1
@@ -161,6 +173,7 @@ function EchoesOfLore:SetupTips()
   short  = "food free"
   order  = order+1
   EchoesOfLore:setupTipData(parent,name,short,order,"free food is everywhere, open everything, careful of stealing though.")  
+  
   name   = "Bag space"
   short  = "bags bank space carry"
   order  = order+1
@@ -168,11 +181,12 @@ function EchoesOfLore:SetupTips()
   name   = "Theft"
   short  = "theft theiving thieve money"
   order  = order+1
-  EchoesOfLore:setupTipData(parent,name,short,order,"Theft is very lucrative (Guards can NOT be killed).")  
-  name   = "Levelling money/gear"
-  short  = "research deconstruct"
+  EchoesOfLore:setupTipData(parent,name,short,order,"Theft is very lucrative (Guards can NOT be killed).")
+  name   = "Levelling"
+  short  = "level money gear spec respec"
   order  = order+1
   EchoesOfLore:setupTipData(parent,name,short,order,"Don't sweat too much about money and gear and specs while levelling.")  
+  
   ---------
   
 end
