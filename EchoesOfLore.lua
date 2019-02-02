@@ -158,9 +158,12 @@ function EchoesOfLore.OnPlayerLoaded(eventCode, initial)
     EchoesOfLore:debugMsg(strL)
   end
   --
-  local currMZIndx = GetCurrentMapZoneIndex()
-  local currMZName = GetZoneNameByIndex(currMZIndx) 
+  local currMZIndx  = GetCurrentMapZoneIndex()
+  local currMZName  = GetZoneNameByIndex(currMZIndx) 
+  local currMapName = GetMapNameByIndex(currMZIndx) 
+  
   local oldMZIndx = EchoesOfLore.savedVariables.currMZIndex
+  
   if(currMZName~=nil and currMZName~="")then
     EchoesOfLore.savedVariables.currMZIndex = currMZIndx
     EchoesOfLore.savedVariables.currMZName  = currMZName    
@@ -170,15 +173,18 @@ function EchoesOfLore.OnPlayerLoaded(eventCode, initial)
     else
       d( zo_strformat(GetString(SI_EOL_REENTERED_ZONE), currMZName ) )          
     end
-  elseif(currMZName~=nil and currMZName~="")then
-    d("currMZIndx = ".. currMZIndx)
+  elseif(currMapName~=nil and currMapName~="")then
+    --d("currMZIndx = ".. currMZIndx)
     --[14:59] (EchoesOfLore) OnPlayerUnloaded: eventCode=589825
     --TODO still in same zone?
     --EchoesOfLore.savedVariables.currMZName
-    d( zo_strformat(GetString(SI_EOL_IN_ZONE), currMZName ) )          
-    currMZName = EchoesOfLore.savedVariables.currMZName
+    EchoesOfLore.savedVariables.currMZIndex = currMZIndx
+    EchoesOfLore.savedVariables.currMZName  = currMapName    
+    d( zo_strformat(GetString(SI_EOL_IN_ZONE), currMapName ) )          
   else
     d("Entered zone... unknown?")
+    d("Debug: cmzi: "..tostring(GetCurrentMapZoneIndex()) .. " name: '" ..GetZoneNameByIndex(GetCurrentMapZoneIndex()) .."'")
+    d("Debug saved: zidx: "..tostring(EchoesOfLore.savedVariables.currMZIndex) .. " zname: '" .. EchoesOfLore.savedVariables.currMZName .. "'")
   end
   
   if(EchoesOfLore.Dungeons[currMZName]~=nil)then
