@@ -1,6 +1,6 @@
 ## Title: EchoesOfLore
 ## Version: 0.0.1
-## APIVersion: 100025 100026 100027
+## APIVersion: 100025 100027
 ## Author: Echomap
 ## Description: EchoesOfLore... will show area lore, dungeon boss hints, and newbie tips
 ## SavedVariables: EchoesOfLore_SavedVariables
