@@ -260,7 +260,7 @@ function EchoesOfLore.OnAddOnLoaded(event, addonName)
     SLASH_COMMANDS["/EchoesOfLore"] = EchoesOfLore.SlashCommandHandler
     SLASH_COMMANDS["/echolore"]     = EchoesOfLore.SlashCommandHandler
     -- Reset autocomplete cache to update it.
-    SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
+    --SLASH_COMMAND_AUTO_COMPLETE:InvalidateSlashCommandCache()
     
     --d(EchoesOfLore.name .. GetString(SI_NEW_ADDON_MESSAGE2)) -- Prints to chat.
     ZO_AlertNoSuppression(UI_ALERT_CATEGORY_ALERT, nil,
