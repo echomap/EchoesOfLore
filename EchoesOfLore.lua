@@ -42,7 +42,7 @@ function EchoesOfLore.SlashCommandHandler(text)
 	end
 
 	if #options == 0 then
-    EchoesOfLore.ToggleGui()
+		EchoesOfLore.ToggleGui()
 	elseif options[1] == "help" then
 		-- TODO Display help  
 	elseif options[1] == "debug" then
