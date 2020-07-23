@@ -1,7 +1,7 @@
 -- Settings menu.
 function EchoesOfLore.LoadSettings()
-    local LAM = LibStub("LibAddonMenu-2.0")
-
+    --local LAM = LibStub("LibAddonMenu-2.0")
+    local LAM = LibAddonMenu2
     local panelData = {
         type = "panel",
         name = EchoesOfLore.menuDisplayName,

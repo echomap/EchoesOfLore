@@ -4,7 +4,8 @@
 ## Author: Echomap
 ## Description: EchoesOfLore... will show area lore, dungeon boss hints, and newbie tips
 ## SavedVariables: EchoesOfLore_SavedVariables
-## DependsOn: LibStub LibAddonMenu-2.0
+## DependsOn: LibAddonMenu-2.0
+## OptionalDependsOn: LibStub
 
 ## This Add-on is not created by, affiliated with or sponsored by ZeniMax Media Inc. or its affiliates.
 ## The Elder Scrolls® and related logos are registered trademarks or trademarks of ZeniMax Media Inc.
