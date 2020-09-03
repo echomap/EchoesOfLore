@@ -2,6 +2,7 @@
 -=-=-=-=-=-=-=-
 0.x.xx
 [*]
+-remove libstub
 0.0.1 Initial
   Need to fix up text
   Need to add text
